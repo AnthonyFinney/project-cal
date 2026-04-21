@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  /* Neobrutalist Palette - Refined */
+  --color-background: #ffffff;
+  --color-background-light: #f3f3f3;
+  --color-background-dark: #e5e5e5;
+
+  /* Vibrant Accents */
+  --color-primary: #ff5a1f; 
+  --color-primary-hover: #ff7b4c;
+  --color-secondary: #00ead3;
+  --color-accent-yellow: #ffff00;
+  --color-accent-pink: #ff00ff;
+  --color-accent-green: #00ff00;
+
+  /* Neutral tones for depth */
+  --color-neo-gray: #333333;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--color-background);
+  color: #000000;
+  font-family: var(--font-sans);
+}
+
+/* Custom Scrollbar - Neo Style */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-left: 3px solid #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-yellow);
+  border: 3px solid #000000;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+.math-display {
+  font-family: var(--font-mono);
+}
+
+/* Neobrutalist Utilities */
+@layer utilities {
+  .neo-panel {
+    background: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px 0px #000000;
+  }
+
+  .neo-button {
+    background: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px 0px #000000;
+    transition: all 0.1s ease;
+  }
+
+  .neo-button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px 0px #000000;
+  }
+
+  .neo-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px 0px #000000;
+  }
+
+  .neo-card {
+    background: #ffffff;
+    border: 4px solid #000000;
+    box-shadow: 8px 8px 0px 0px #000000;
+  }
+
+  .neo-input {
+    background: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px 0px #000000;
+    transition: all 0.1s ease;
+  }
+
+  .neo-input:focus {
+    outline: none;
+    box-shadow: 6px 6px 0px 0px #000000;
+    transform: translate(-2px, -2px);
+  }
+}
