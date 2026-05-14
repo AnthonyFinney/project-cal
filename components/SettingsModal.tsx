@@ -32,37 +32,37 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
     }, [isOpen]);
 
     const InfoRow = ({ icon: Icon, label, value, status }: any) => (
-        <div className="flex items-center justify-between p-3 bg-white rounded-none border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+        <div className="flex items-center justify-between p-3 bg-[#111111] rounded-2xl border border-white/10 shadow-xl">
             <div className="flex items-center gap-3">
-                <Icon size={18} className="text-black" />
-                <span className="text-sm text-black font-bold">{label}</span>
+                <Icon size={18} className="text-white" />
+                <span className="text-sm text-white font-bold">{label}</span>
             </div>
             <div className="flex items-center gap-2">
-                <span className={`text-sm font-mono font-bold ${status === 'online' ? 'text-green-600' : status === 'offline' ? 'text-red-600' : 'text-black'}`}>
+                <span className={`text-sm font-mono font-bold ${status === 'online' ? 'text-green-600' : status === 'offline' ? 'text-red-600' : 'text-white'}`}>
                     {value}
                 </span>
-                {status === 'online' && <div className="size-2 rounded-none border border-black bg-green-500" />}
+                {status === 'online' && <div className="size-2 rounded-2xl border border-white/10 bg-green-500" />}
             </div>
         </div>
     );
 
     return (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-white/60 animate-in fade-in duration-200">
-            <div className="w-full max-w-md bg-white border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-[#111111]/60 animate-in fade-in duration-200">
+            <div className="w-full max-w-md bg-[#111111] border border-white/10 rounded-2xl shadow-xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
 
                 {/* Header */}
-                <div className="flex items-center justify-between p-4 border-b-2 border-black bg-white">
-                    <h2 className="text-lg font-bold text-black flex items-center gap-2">
+                <div className="flex items-center justify-between p-4 border-b-2 border-white/10 bg-[#111111]">
+                    <h2 className="text-lg font-bold text-white flex items-center gap-2">
                         <Settings size={20} /> System Status
                     </h2>
-                    <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded-none border-2 border-black transition-all">
-                        <X size={20} className="text-black" />
+                    <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded-2xl border border-white/10 transition-all">
+                        <X size={20} className="text-white" />
                     </button>
                 </div>
 
                 {/* Content */}
                 <div className="p-6 space-y-4">
-                    <div className="text-xs font-bold text-black uppercase tracking-wider mb-2">Connectivity</div>
+                    <div className="text-xs font-bold text-white uppercase tracking-wider mb-2">Connectivity</div>
 
                     <InfoRow
                         icon={Server}
@@ -78,7 +78,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
                         status="online"
                     />
 
-                    <div className="text-xs font-bold text-black uppercase tracking-wider mb-2 mt-6">Application</div>
+                    <div className="text-xs font-bold text-white uppercase tracking-wider mb-2 mt-6">Application</div>
 
                     <InfoRow icon={Activity} label="Version" value="v1.0.0-beta" />
                     <InfoRow icon={Volume2} label="Audio Engine" value="Web Audio API (Synth)" />
@@ -86,8 +86,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
 
                 </div>
 
-                <div className="p-4 border-t-2 border-black bg-white text-center">
-                    <p className="text-xs text-black font-bold">CAS Cal &copy; 2026</p>
+                <div className="p-4 border-t-2 border-white/10 bg-[#111111] text-center">
+                    <p className="text-xs text-white font-bold">CAS Cal &copy; 2026</p>
                 </div>
             </div>
         </div>

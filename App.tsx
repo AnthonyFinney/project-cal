@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Sidebar from './components/Sidebar';
+import React, { useState, useEffect } from 'react';
 import TopBar from './components/TopBar';
 import ConsoleMode from './components/ConsoleMode';
 import GraphingMode from './components/GraphingMode';
@@ -15,8 +14,6 @@ import { Menu } from 'lucide-react';
 import { CalculatorProvider } from './CalculatorContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { NotificationProvider } from './contexts/NotificationContext';
-import { useEffect } from 'react';
-
 const API_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
 
 const App: React.FC = () => {
@@ -68,32 +65,23 @@ const App: React.FC = () => {
     <AuthProvider>
       <NotificationProvider>
         <CalculatorProvider>
-          <div className="flex h-screen overflow-hidden bg-white text-black font-sans selection:bg-primary selection:text-white">
-
-            {/* Mobile Sidebar Overlay */}
-            <div className={`fixed inset-0 bg-black/50 z-50 lg:hidden transition-opacity ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setMobileMenuOpen(false)} />
-
-            {/* Sidebar (Fixed Left) */}
-            <div className={`fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 lg:static lg:transform-none ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-              <Sidebar currentMode={currentMode} setMode={(m) => { setMode(m); setMobileMenuOpen(false); }} />
-            </div>
-
+          <div className="flex h-screen overflow-hidden bg-background text-primary font-sans selection:bg-white/20 selection:text-white">
+            
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col min-w-0 h-full relative">
-
-              {/* Mobile Header Trigger */}
-              <div className="lg:hidden absolute top-4 left-4 z-40">
-                <button onClick={() => setMobileMenuOpen(true)} className="p-2 bg-white border-2 border-black rounded-none text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]">
-                  <Menu size={24} />
-                </button>
+              
+              {/* Global Top Bar (Floating Header) */}
+              <div className="w-full flex justify-center sticky top-0 z-50 pt-4 px-4 pointer-events-none">
+                <div className="pointer-events-auto w-full">
+                  <TopBar onNavigate={(mode) => setMode(mode)} currentMode={currentMode} />
+                </div>
               </div>
 
-              {/* Global Top Bar */}
-              <TopBar onNavigate={(mode) => setMode(mode)} />
-
               {/* Content View */}
-              <main className="flex-1 overflow-hidden relative">
-                {renderContent()}
+              <main className="flex-1 overflow-y-auto relative custom-scrollbar flex justify-center pt-8 pb-16 px-4">
+                <div className="w-full h-full flex flex-col">
+                  {renderContent()}
+                </div>
               </main>
             </div>
           </div>

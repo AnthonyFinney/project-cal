@@ -575,15 +575,15 @@ const EpicyclesPRO: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col lg:flex-row h-full bg-background text-black overflow-hidden font-black">
+        <div className="flex flex-col lg:flex-row h-full bg-background text-white overflow-hidden font-black">
             {/* Sidebar */}
-            <div className="w-full lg:w-80 bg-background border-r-2 border-black flex flex-col z-20 shrink-0 shadow-[4px_0px_0px_0px_rgba(0,0,0,1)] overflow-y-auto">
-                <div className="p-5 border-b-2 border-black flex justify-between items-center bg-white">
-                    <h2 className="text-sm font-black text-black uppercase tracking-wider flex items-center gap-2">
-                        <Sparkles size={16} className="text-black" />
+            <div className="w-full lg:w-80 bg-background border-r-2 border-white/10 flex flex-col z-20 shrink-0 shadow-xl overflow-y-auto">
+                <div className="p-5 border-b-2 border-white/10 flex justify-between items-center bg-[#111111]">
+                    <h2 className="text-sm font-black text-white uppercase tracking-wider flex items-center gap-2">
+                        <Sparkles size={16} className="text-white" />
                         Epicycles PRO v2
                     </h2>
-                    <span className="text-xs px-2 py-0.5 rounded-none bg-black text-white border-2 border-black font-black">
+                    <span className="text-xs px-2 py-0.5 rounded-2xl bg-black text-white border border-white/10 font-black">
                         {inputMode === 'drawing' ? 'DRAW' : inputMode === 'function' ? 'f(t)' : 'LIVE'}
                     </span>
                 </div>
@@ -591,7 +591,7 @@ const EpicyclesPRO: React.FC = () => {
                 <div className="p-5 space-y-6 flex-1">
                     {/* Mode Toggle */}
                     <div className="space-y-3">
-                        <label className="text-xs font-black text-black uppercase">Modo</label>
+                        <label className="text-xs font-black text-white uppercase">Modo</label>
                         <div className="grid grid-cols-3 gap-2">
                             {[
                                 { mode: 'drawing' as InputMode, icon: Pencil, label: 'Dibujar' },
@@ -601,9 +601,9 @@ const EpicyclesPRO: React.FC = () => {
                                 <button
                                     key={mode}
                                     onClick={() => setInputMode(mode)}
-                                    className={`py-2 px-3 text-xs font-black rounded-none transition-all border-2 border-black flex flex-col items-center gap-1 ${inputMode === mode
+                                    className={`py-2 px-3 text-xs font-black rounded-2xl transition-all border border-white/10 flex flex-col items-center gap-1 ${inputMode === mode
                                         ? 'bg-primary text-white shadow-none translate-x-[2px] translate-y-[2px]'
-                                        : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]'
+                                        : 'bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl'
                                         }`}
                                 >
                                     <Icon size={16} />
@@ -615,14 +615,14 @@ const EpicyclesPRO: React.FC = () => {
 
                     {/* Drawing Mode */}
                     {inputMode === 'drawing' && (
-                        <div className="p-4 rounded-none bg-primary/10 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <p className="text-sm text-black font-black">
+                        <div className="p-4 rounded-2xl bg-primary/10 border border-white/10 shadow-xl">
+                            <p className="text-sm text-white font-black">
                                 ✏️ Dibuja una forma en el canvas. Al soltar se aplicará suavizado Laplaciano (Engine Desktop).
                             </p>
                             {drawnPoints.length > 0 && (
                                 <button
                                     onClick={clearDrawing}
-                                    className="mt-3 w-full py-2 text-sm bg-white text-red-600 border-2 border-black rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] font-black flex items-center justify-center gap-2"
+                                    className="mt-3 w-full py-2 text-sm bg-[#111111] text-red-600 border border-white/10 rounded-2xl shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl font-black flex items-center justify-center gap-2"
                                 >
                                     <Trash2 size={14} />
                                     Borrar
@@ -634,35 +634,35 @@ const EpicyclesPRO: React.FC = () => {
                     {/* Function Mode */}
                     {inputMode === 'function' && (
                         <div className="space-y-3">
-                            <label className="text-xs font-black text-black uppercase">Función Paramétrica</label>
+                            <label className="text-xs font-black text-white uppercase">Función Paramétrica</label>
                             <textarea
                                 value={funcExpression}
                                 onChange={(e) => setFuncExpression(e.target.value)}
                                 placeholder="x = cos(t); y = sin(2*t)"
-                                className="w-full h-20 bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono text-sm focus:outline-none focus:ring-2 focus:ring-black resize-none placeholder:text-black/30"
+                                className="w-full h-20 bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-black resize-none placeholder:text-white/30"
                             />
                             {funcError && (
                                 <p className="text-xs text-red-600 font-black">{funcError}</p>
                             )}
                             <button
                                 onClick={applyFunction}
-                                className="w-full py-2 bg-primary text-white font-black rounded-none border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                                className="w-full py-2 bg-primary text-white font-black rounded-2xl border border-white/10 shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl"
                             >
                                 Aplicar Función
                             </button>
-                            <div className="text-xs text-black space-y-1">
+                            <div className="text-xs text-white space-y-1">
                                 <p className="font-black">Ejemplos:</p>
                                 <button
                                     onClick={() => setFuncExpression('x = cos(t); y = sin(2*t)')}
-                                    className="text-black underline block font-black"
+                                    className="text-white underline block font-black"
                                 >x = cos(t); y = sin(2*t)</button>
                                 <button
                                     onClick={() => setFuncExpression('x = cos(t)*cos(3*t); y = sin(t)*cos(3*t)')}
-                                    className="text-black underline block font-black"
+                                    className="text-white underline block font-black"
                                 >x = cos(t)*cos(3*t); y = sin(t)*cos(3*t)</button>
                                 <button
                                     onClick={() => setFuncExpression('1 + 0.5*cos(5*t)')}
-                                    className="text-black underline block font-black"
+                                    className="text-white underline block font-black"
                                 >r = 1 + 0.5*cos(5*t) (polar)</button>
                             </div>
                         </div>
@@ -672,7 +672,7 @@ const EpicyclesPRO: React.FC = () => {
                     {inputMode === 'animation' && (
                         <>
                             <div className="space-y-3">
-                                <label className="text-xs font-black text-black uppercase">Plantillas</label>
+                                <label className="text-xs font-black text-white uppercase">Plantillas</label>
                                 <div className="grid grid-cols-3 gap-2">
                                     {[
                                         { type: 'heart' as TemplateType, icon: Heart, label: 'Corazón' },
@@ -682,7 +682,7 @@ const EpicyclesPRO: React.FC = () => {
                                         <button
                                             key={type}
                                             onClick={() => applyTemplate(type)}
-                                            className="py-2 px-3 text-xs font-black rounded-none transition-all border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center gap-1"
+                                            className="py-2 px-3 text-xs font-black rounded-2xl transition-all border border-white/10 bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl flex flex-col items-center gap-1"
                                         >
                                             <Icon size={16} />
                                             {label}
@@ -692,13 +692,13 @@ const EpicyclesPRO: React.FC = () => {
                                 <div className="grid grid-cols-2 gap-2">
                                     <button
                                         onClick={() => applyTemplate('spiral')}
-                                        className="py-2 px-3 text-xs font-black rounded-none transition-all border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                                        className="py-2 px-3 text-xs font-black rounded-2xl transition-all border border-white/10 bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl"
                                     >
                                         🌀 Espiral
                                     </button>
                                     <button
                                         onClick={() => applyTemplate('lemniscate')}
-                                        className="py-2 px-3 text-xs font-black rounded-none transition-all border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                                        className="py-2 px-3 text-xs font-black rounded-2xl transition-all border border-white/10 bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl"
                                     >
                                         ∞ Lemniscata
                                     </button>
@@ -707,7 +707,7 @@ const EpicyclesPRO: React.FC = () => {
 
                             {/* Wave Presets */}
                             <div className="space-y-3">
-                                <label className="text-xs font-black text-black uppercase">Ondas Preset</label>
+                                <label className="text-xs font-black text-white uppercase">Ondas Preset</label>
                                 <div className="grid grid-cols-2 gap-2">
                                     {(['square', 'triangle', 'sawtooth'] as WaveType[]).map((type) => (
                                         <button
@@ -717,9 +717,9 @@ const EpicyclesPRO: React.FC = () => {
                                                 pathRef.current = [];
                                                 timeRef.current.t = 0;
                                             }}
-                                            className={`py-2 px-3 text-xs font-black rounded-none transition-all border-2 border-black ${waveType === type && fourierCoeffs.length === 0
+                                            className={`py-2 px-3 text-xs font-black rounded-2xl transition-all border border-white/10 ${waveType === type && fourierCoeffs.length === 0
                                                 ? 'bg-primary text-white shadow-none translate-x-[2px] translate-y-[2px]'
-                                                : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]'
+                                                : 'bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl'
                                                 }`}
                                         >
                                             {type === 'square' && '▭ Cuadrada'}
@@ -730,11 +730,11 @@ const EpicyclesPRO: React.FC = () => {
                                     <button
                                         disabled={fourierCoeffs.length === 0}
                                         onClick={() => { setWaveType('custom'); pathRef.current = []; }}
-                                        className={`py-2 px-3 text-xs font-black rounded-none transition-all border-2 border-black ${waveType === 'custom' && fourierCoeffs.length > 0
+                                        className={`py-2 px-3 text-xs font-black rounded-2xl transition-all border border-white/10 ${waveType === 'custom' && fourierCoeffs.length > 0
                                             ? 'bg-primary text-white shadow-none translate-x-[2px] translate-y-[2px]'
                                             : fourierCoeffs.length === 0
-                                                ? 'bg-white text-black/30 border-black/20 cursor-not-allowed shadow-none'
-                                                : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]'
+                                                ? 'bg-[#111111] text-white/30 border-white/10/20 cursor-not-allowed shadow-none'
+                                                : 'bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl'
                                             }`}
                                     >
                                         ✏️ Custom
@@ -745,59 +745,59 @@ const EpicyclesPRO: React.FC = () => {
                             {/* Harmonics */}
                             <div className="space-y-3">
                                 <div className="flex justify-between items-center">
-                                    <label className="text-xs font-black text-black uppercase">Armónicos</label>
+                                    <label className="text-xs font-black text-white uppercase">Armónicos</label>
                                     <input
                                         type="number"
                                         value={numCircles}
                                         onChange={(e) => { setNumCircles(parseInt(e.target.value) || 1); pathRef.current = []; }}
-                                        className="w-16 bg-white border-2 border-black rounded-none px-2 py-1 text-xs text-black font-mono text-right focus:outline-none"
+                                        className="w-16 bg-[#111111] border border-white/10 rounded-2xl px-2 py-1 text-xs text-white font-mono text-right focus:outline-none"
                                     />
                                 </div>
                                 <input
                                     type="range" min="1" max={waveType === 'custom' ? Math.max(fourierCoeffs.length, 100) : 100} step="1"
                                     value={numCircles}
                                     onChange={(e) => { setNumCircles(parseInt(e.target.value)); pathRef.current = []; }}
-                                    className="w-full h-2 bg-white border-2 border-black rounded-none appearance-none cursor-pointer accent-black"
+                                    className="w-full h-2 bg-[#111111] border border-white/10 rounded-2xl appearance-none cursor-pointer accent-black"
                                 />
                             </div>
 
                             {/* Speed */}
                             <div className="space-y-3">
                                 <div className="flex justify-between items-center">
-                                    <label className="text-xs font-black text-black uppercase">Velocidad</label>
-                                    <span className="text-xs text-black font-mono font-black">{speed.toFixed(1)}x</span>
+                                    <label className="text-xs font-black text-white uppercase">Velocidad</label>
+                                    <span className="text-xs text-white font-mono font-black">{speed.toFixed(1)}x</span>
                                 </div>
                                 <input
                                     type="range" min="0.1" max="5.0" step="0.1"
                                     value={speed}
                                     onChange={(e) => setSpeed(parseFloat(e.target.value))}
-                                    className="w-full h-2 bg-white border-2 border-black rounded-none appearance-none cursor-pointer accent-black"
+                                    className="w-full h-2 bg-[#111111] border border-white/10 rounded-2xl appearance-none cursor-pointer accent-black"
                                 />
                             </div>
 
                             {/* Visual Options */}
                             <div className="space-y-3">
-                                <label className="text-xs font-black text-black uppercase">Visual</label>
+                                <label className="text-xs font-black text-white uppercase">Visual</label>
                                 <div className="flex items-center gap-3">
-                                    <label className="flex items-center gap-2 text-xs text-black cursor-pointer font-black">
+                                    <label className="flex items-center gap-2 text-xs text-white cursor-pointer font-black">
                                         <input
                                             type="checkbox"
                                             checked={glowEnabled}
                                             onChange={(e) => setGlowEnabled(e.target.checked)}
-                                            className="accent-black w-4 h-4 border-2 border-black rounded-none"
+                                            className="accent-black w-4 h-4 border border-white/10 rounded-2xl"
                                         />
                                         Glow
                                     </label>
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <span className="text-xs text-black font-black">Trail</span>
-                                    <span className="text-xs text-black font-mono font-black">{trailLength}</span>
+                                    <span className="text-xs text-white font-black">Trail</span>
+                                    <span className="text-xs text-white font-mono font-black">{trailLength}</span>
                                 </div>
                                 <input
                                     type="range" min="100" max="3000" step="100"
                                     value={trailLength}
                                     onChange={(e) => setTrailLength(parseInt(e.target.value))}
-                                    className="w-full h-2 bg-white border-2 border-black rounded-none appearance-none cursor-pointer accent-black"
+                                    className="w-full h-2 bg-[#111111] border border-white/10 rounded-2xl appearance-none cursor-pointer accent-black"
                                 />
                             </div>
                         </>
@@ -806,11 +806,11 @@ const EpicyclesPRO: React.FC = () => {
                     {/* Fourier Info & Editor */}
                     {waveType === 'custom' && fourierCoeffs.length > 0 && (
                         <div className="space-y-4">
-                            <div className="p-4 rounded-none bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                            <div className="p-4 rounded-2xl bg-[#111111] border border-white/10 shadow-xl">
                                 <div className="flex items-center justify-between mb-2">
                                     <div className="flex items-center gap-2">
-                                        <div className="size-2 rounded-none bg-emerald-500 border border-black"></div>
-                                        <span className="text-xs font-black text-black">Fourier DFT</span>
+                                        <div className="size-2 rounded-2xl bg-emerald-500 border border-white/10"></div>
+                                        <span className="text-xs font-black text-white">Fourier DFT</span>
                                     </div>
                                     <button
                                         onClick={() => {
@@ -824,22 +824,22 @@ const EpicyclesPRO: React.FC = () => {
                                             navigator.clipboard.writeText(pyCode);
                                             alert("Código Python copiado al portapapeles! 🐍");
                                         }}
-                                        className="text-[10px] px-2 py-1 bg-white hover:bg-black/5 rounded-none border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] text-black font-black transition-all"
+                                        className="text-[10px] px-2 py-1 bg-[#111111] hover:bg-black/5 rounded-2xl border border-white/10 shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl text-white font-black transition-all"
                                     >
                                         Export Python
                                     </button>
                                 </div>
-                                <div className="text-xs text-black font-mono mb-3 font-black">
+                                <div className="text-xs text-white font-mono mb-3 font-black">
                                     {fourierCoeffs.length} coeficientes • Top 5 Armónicos:
                                 </div>
 
                                 {/* Harmonic Editor (Top 5) */}
                                 <div className="space-y-3 max-h-60 overflow-y-auto pr-1 custom-scrollbar">
                                     {fourierCoeffs.slice(0, 5).map((coeff, idx) => (
-                                        <div key={idx} className="bg-white p-2 rounded-none border-2 border-black">
-                                            <div className="flex justify-between text-[10px] text-black mb-1 font-black">
+                                        <div key={idx} className="bg-[#111111] p-2 rounded-2xl border border-white/10">
+                                            <div className="flex justify-between text-[10px] text-white mb-1 font-black">
                                                 <span>Freq: {coeff.freq}Hz</span>
-                                                <span className="text-black">#{idx + 1}</span>
+                                                <span className="text-white">#{idx + 1}</span>
                                             </div>
 
                                             <div className="space-y-1">
@@ -853,7 +853,7 @@ const EpicyclesPRO: React.FC = () => {
                                                             newCoeffs[idx].amplitude = parseFloat(e.target.value);
                                                             setFourierCoeffs(newCoeffs);
                                                         }}
-                                                        className="flex-1 h-2 bg-white border border-black rounded-none appearance-none cursor-pointer accent-black"
+                                                        className="flex-1 h-2 bg-[#111111] border border-white/10 rounded-2xl appearance-none cursor-pointer accent-black"
                                                     />
                                                     <span className="text-[10px] w-8 text-right font-mono font-black">{coeff.amplitude.toFixed(0)}</span>
                                                 </div>
@@ -867,7 +867,7 @@ const EpicyclesPRO: React.FC = () => {
                                                             newCoeffs[idx].phase = parseFloat(e.target.value);
                                                             setFourierCoeffs(newCoeffs);
                                                         }}
-                                                        className="flex-1 h-2 bg-white border border-black rounded-none appearance-none cursor-pointer accent-black"
+                                                        className="flex-1 h-2 bg-[#111111] border border-white/10 rounded-2xl appearance-none cursor-pointer accent-black"
                                                     />
                                                     <span className="text-[10px] w-8 text-right font-mono font-black">{coeff.phase.toFixed(1)}</span>
                                                 </div>
@@ -882,7 +882,7 @@ const EpicyclesPRO: React.FC = () => {
                     {/* Reset */}
                     <button
                         onClick={() => { pathRef.current = []; timeRef.current.t = 0; setTick(t => t + 1); }}
-                        className="w-full py-2 text-xs border-2 border-black rounded-none bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all font-black"
+                        className="w-full py-2 text-xs border border-white/10 rounded-2xl bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl transition-all font-black"
                     >
                         <RefreshCw size={12} className="inline mr-2" />
                         Reiniciar
@@ -907,24 +907,24 @@ const EpicyclesPRO: React.FC = () => {
                 />
 
                 {/* Floating Controls */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 p-2 rounded-none bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-30">
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 p-2 rounded-2xl bg-[#111111] border border-white/10 shadow-xl z-30">
                     <button
                         onClick={() => { zoomRef.current = Math.max(0.1, zoomRef.current - 0.2); setTick(t => t + 1); }}
-                        className="p-3 rounded-none border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all"
+                        className="p-3 rounded-2xl border border-white/10 bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl transition-all"
                     >
                         <ZoomOut size={20} />
                     </button>
                     <div className="w-0.5 h-10 bg-black"></div>
                     <button
                         onClick={() => setIsPlaying(!isPlaying)}
-                        className="size-12 rounded-none bg-primary text-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                        className="size-12 rounded-2xl bg-primary text-white border border-white/10 shadow-xl flex items-center justify-center hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                     >
                         {isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" className="ml-1" />}
                     </button>
                     <div className="w-0.5 h-10 bg-black"></div>
                     <button
                         onClick={() => { zoomRef.current = Math.min(10, zoomRef.current + 0.2); setTick(t => t + 1); }}
-                        className="p-3 rounded-none border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all"
+                        className="p-3 rounded-2xl border border-white/10 bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl transition-all"
                     >
                         <ZoomIn size={20} />
                     </button>

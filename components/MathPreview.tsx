@@ -87,11 +87,11 @@ const MathPreview: React.FC<MathPreviewProps> = ({
         <div
             onClick={onClick}
             className={`
-        ${showBorder ? 'border-2 border-black rounded-none bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : ''}
+        ${showBorder ? 'border border-white/10 rounded-2xl bg-[#111111] shadow-xl' : ''}
         ${onClick ? 'cursor-pointer hover:bg-gray-50' : ''}
         ${sizeClasses[size]}
         p-4 min-h-[80px] flex items-center justify-center
-        transition-all duration-200 text-black
+        transition-all duration-200 text-white
       `}
         >
             {latex ? (
@@ -100,7 +100,7 @@ const MathPreview: React.FC<MathPreviewProps> = ({
                     className="katex-preview font-bold"
                 />
             ) : (
-                <span className="text-black font-bold italic text-base">
+                <span className="text-white font-bold italic text-base">
                     {emptyMessage}
                 </span>
             )}
@@ -132,8 +132,8 @@ export const MiniPreview: React.FC<MiniPreviewProps> = ({ latex, label }) => {
 
     return (
         <div className="flex flex-col items-center gap-1">
-            <div dangerouslySetInnerHTML={{ __html: html }} className="text-sm font-bold text-black" />
-            {label && <span className="text-[10px] text-black font-bold">{label}</span>}
+            <div dangerouslySetInnerHTML={{ __html: html }} className="text-sm font-bold text-white" />
+            {label && <span className="text-[10px] text-white font-bold">{label}</span>}
         </div>
     );
 };
@@ -168,7 +168,7 @@ export const LiveEditor: React.FC<LiveEditorProps> = ({
 
             {/* Indicador de placeholder activo */}
             {activePlaceholderId && (
-                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-black font-bold flex items-center gap-1">
+                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-white font-bold flex items-center gap-1">
                     <span className="animate-pulse">●</span>
                     <span>Tab para siguiente □</span>
                 </div>

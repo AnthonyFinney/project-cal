@@ -6,9 +6,10 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianG
 import nerdamer from 'nerdamer';
 import ScientificKeypad from './ScientificKeypad';
 import { Eraser, Cloud, CloudOff, AlertCircle, ToggleLeft, ToggleRight, Sparkles, ChevronUp, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import apiService from '../services/apiService';
 import { checkEasterEgg, parseNumberSystems, EasterEggResult } from '../services/easterEggs';
-import { useCalculator } from '../CalculatorContext';
+import { useCalculator, UserFunction } from '../CalculatorContext';
 import { useNotifications } from '../contexts/NotificationContext';
 import { MathService } from '../services/MathService';
 import { parseExpression, ParseResult } from '../services/mathParser';
@@ -69,7 +70,8 @@ const ConsoleMode: React.FC = () => {
   const substituteUserFunctions = (expr: string): string => {
     let result = expr;
     // Iterate over user functions and expand calls
-    for (const [name, fn] of Object.entries(userFunctions)) {
+    for (const [name, fnRaw] of Object.entries(userFunctions)) {
+      const fn = fnRaw as UserFunction;
       // Match function calls like f(3) or g(x+1, 2)
       const regex = new RegExp(`\\b${name}\\s*\\(`, 'g');
       let match;
@@ -651,6 +653,14 @@ const ConsoleMode: React.FC = () => {
       setInput(input.slice(0, -1));
     } else if (val === '=') {
       if (!input.trim() || isLoading) return;
+
+      const trimmedInput = input.trim().toLowerCase();
+      if (trimmedInput === 'clear' || trimmedInput === 'cls' || trimmedInput === '/clear') {
+        setHistory([]);
+        setInput('');
+        return;
+      }
+
       setIsLoading(true);
       try {
         // Split by semicolons or newlines for batch evaluation
@@ -720,25 +730,25 @@ const ConsoleMode: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full w-full bg-white text-black overflow-hidden relative">
+    <div className="flex flex-col h-full w-full bg-[#111111] text-white overflow-hidden relative">
       {/* Main: Console Output & Input Area */}
       <div className="flex-1 grid grid-rows-[1fr_auto] h-full w-full min-w-0 overflow-hidden relative z-10">
 
         {/* History Log */}
         <div className="flex-1 overflow-y-auto p-4 lg:p-8 space-y-6">
-          <div className="flex justify-between items-end mb-4 border-b-4 border-black pb-2">
+          <div className="flex justify-between items-end mb-4 border-b-4 border-white/10 pb-2">
             <div className="flex items-center gap-2">
-              <h2 className="text-black text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                <Sparkles size={12} className="text-black" />
+              <h2 className="text-white text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                <Sparkles size={12} className="text-white" />
                 Historial de Cálculos
               </h2>
               {useBackend ? (
                 <div title="Backend SymPy conectado">
-                  <Cloud size={14} className="text-black" />
+                  <Cloud size={14} className="text-white" />
                 </div>
               ) : (
                 <div title="Modo local (Nerdamer)">
-                  <CloudOff size={14} className="text-black" />
+                  <CloudOff size={14} className="text-white" />
                 </div>
               )}
             </div>
@@ -746,9 +756,9 @@ const ConsoleMode: React.FC = () => {
               {/* EXACTO/APROX Toggle */}
               <button
                 onClick={toggleExact}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-none text-[10px] font-black tracking-wider uppercase transition-all border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] ${isExact
-                  ? 'bg-accent-yellow text-black'
-                  : 'bg-white text-black'
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-2xl text-[10px] font-black tracking-wider uppercase transition-all border border-white/10 shadow-xl ${isExact
+                  ? 'bg-white/10 text-white'
+                  : 'bg-[#111111] text-white'
                   }`}
                 title={isExact ? 'Mostrando resultado exacto' : 'Mostrando aproximación'}
               >
@@ -761,34 +771,41 @@ const ConsoleMode: React.FC = () => {
 
               <div className="w-1 h-6 bg-black mx-1"></div>
 
-              <button onClick={() => setHistory([])} className="text-black hover:bg-accent-pink transition-all p-2 border-2 border-black rounded-none shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] bg-white" title="Limpiar historial">
+              <button onClick={() => setHistory([])} className="text-white hover:bg-white/5 transition-all p-2 border border-white/10 rounded-2xl shadow-xl bg-[#111111]" title="Limpiar historial">
                 <Eraser size={16} />
               </button>
             </div>
           </div>
 
           {history.length === 0 && (
-            <div className="flex flex-col items-center justify-center h-40 text-black mt-20">
+            <div className="flex flex-col items-center justify-center h-40 text-white mt-20">
               <span className="text-8xl mb-4 font-black">∫</span>
               <p className="text-sm font-black tracking-widest uppercase">Start calculating...</p>
             </div>
           )}
 
-          {history.map((item) => (
-            <div key={item.id} className="group flex flex-col gap-4 p-6 rounded-none bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all">
-              <div className="text-right text-black text-xl font-mono tracking-wide">
+          <AnimatePresence>
+            {history.map((item) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                layout
+                className="group flex flex-col gap-4 p-6 rounded-2xl bg-[#111111] border border-white/10 shadow-xl transition-all"
+              >
+                <div className="text-right text-white text-xl font-mono tracking-wide">
                 <MathDisplay expression={item.expression} />
               </div>
 
               {/* Easter Egg / AI Response Display */}
               {item.easterEgg && item.easterEgg.message && (
                 <div className={`
-                  my-2 p-4 rounded-none border-4 border-black text-sm text-black
-                  ${item.easterEgg.animation === 'rainbow' ? 'bg-accent-pink' : ''}
-                  ${item.easterEgg.animation === 'glow' ? 'bg-accent-yellow' : ''}
-                  ${item.easterEgg.animation === 'sparkle' ? 'bg-accent-green' : ''}
-                  ${!item.easterEgg.animation ? 'bg-white' : ''}
-                  shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+                  my-2 p-4 rounded-2xl border border-white/10 text-sm text-white
+                  ${item.easterEgg.animation === 'rainbow' ? 'bg-white/5' : ''}
+                  ${item.easterEgg.animation === 'glow' ? 'bg-white/10' : ''}
+                  ${item.easterEgg.animation === 'sparkle' ? 'bg-white/5' : ''}
+                  ${!item.easterEgg.animation ? 'bg-[#111111]' : ''}
+                  shadow-xl
                 `}>
                   <div className="flex items-start gap-3">
                     <span className="text-2xl pt-1 shrink-0">{item.easterEgg.emoji || '✨'}</span>
@@ -800,18 +817,18 @@ const ConsoleMode: React.FC = () => {
               )}
 
               <div className="text-right">
-                <span className="text-black text-3xl font-black font-mono">
+                <span className="text-white text-3xl font-black font-mono">
                   = {isExact ? (
                     <MathDisplay expression={item.result} isResult inline />
                   ) : (
-                    <span className="bg-accent-green/20 px-2">≈ {item.approxResult || item.result}</span>
+                    <span className="bg-white/5/20 px-2">≈ {item.approxResult || item.result}</span>
                   )}
                 </span>
               </div>
 
               {/* Gráfica generada con plot(expr) */}
               {item.plotData && item.plotData.length > 0 && (
-                <div className="h-64 mt-4 w-full bg-white rounded-none p-4 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <div className="h-64 mt-4 w-full bg-[#111111] rounded-2xl p-4 border border-white/10 shadow-xl">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={item.plotData} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
                       <CartesianGrid strokeDasharray="0" stroke="#000" vertical={true} />
@@ -850,25 +867,26 @@ const ConsoleMode: React.FC = () => {
                   </ResponsiveContainer>
                 </div>
               )}
-            </div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
           <div ref={messagesEndRef} />
         </div>
 
 
 
       {/* ── Quick Action Bar + Collapsible Toolbar ── */}
-      <div className="bg-white border-t-4 border-black shrink-0 z-20">
+      <div className="bg-[#111111] border-t-4 border-white/10 shrink-0 z-20">
 
         {/* Quick Buttons Row — always visible */}
         <div className="flex items-center gap-2 px-4 pt-3 pb-2 overflow-x-auto scrollbar-none">
           {/* Toggle toolbar */}
           <button
             onClick={() => setShowToolbar(!showToolbar)}
-            className={`shrink-0 px-3 py-2 rounded-none text-xs font-black transition-all border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] ${
+            className={`shrink-0 px-3 py-2 rounded-2xl text-xs font-black transition-all border border-white/10 shadow-xl ${
               showToolbar
-                ? 'bg-accent-pink text-black'
-                : 'bg-white text-black hover:bg-accent-pink/50'
+                ? 'bg-white/5 text-white'
+                : 'bg-[#111111] text-white hover:bg-white/5/50'
             }`}
             title="Panel de funciones"
           >
@@ -899,9 +917,9 @@ const ConsoleMode: React.FC = () => {
             <button
               key={btn.label}
               onClick={() => setInput(input + btn.val)}
-              className="shrink-0 px-4 py-2 rounded-none text-sm font-mono font-black
-                bg-white border-2 border-black text-black hover:bg-accent-green hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]
-                transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none select-none shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+              className="shrink-0 px-4 py-2 rounded-2xl text-sm font-mono font-black
+                bg-[#111111] border border-white/10 text-white hover:bg-white/5 hover:shadow-xl
+                transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none select-none shadow-xl"
             >
               {btn.label}
             </button>
@@ -910,17 +928,17 @@ const ConsoleMode: React.FC = () => {
 
         {/* Collapsible Toolbar Panel */}
         {showToolbar && (
-          <div className="border-t-4 border-black bg-white">
+          <div className="border-t-4 border-white/10 bg-[#111111]">
             {/* Tabs */}
             <div className="flex gap-2 px-4 pt-3 pb-1">
               {(['FUNC', 'ABC', 'GREEK', 'CONST'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setToolbarTab(tab)}
-                  className={`px-4 py-2 text-xs font-black rounded-none transition-all border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] ${
+                  className={`px-4 py-2 text-xs font-black rounded-2xl transition-all border border-white/10 shadow-xl ${
                     toolbarTab === tab
-                      ? 'bg-accent-pink text-black translate-x-[2px] translate-y-[2px] shadow-none'
-                      : 'bg-white text-black hover:bg-accent-pink/30'
+                      ? 'bg-white/5 text-white translate-x-[2px] translate-y-[2px] shadow-none'
+                      : 'bg-[#111111] text-white hover:bg-white/5/30'
                   }`}
                 >
                   {tab === 'GREEK' ? 'αβγ' : tab === 'FUNC' ? 'ƒ(x)' : tab === 'ABC' ? 'xyz' : 'π e c'}
@@ -929,7 +947,7 @@ const ConsoleMode: React.FC = () => {
             </div>
 
             {/* Tab Content */}
-            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2 px-4 pb-4 pt-2 max-h-48 overflow-y-auto custom-scrollbar bg-white">
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2 px-4 pb-4 pt-2 max-h-48 overflow-y-auto custom-scrollbar bg-[#111111]">
               {toolbarTab === 'FUNC' && [
                 { l: 'sinh', v: 'sinh(' }, { l: 'cosh', v: 'cosh(' }, { l: 'tanh', v: 'tanh(' },
                 { l: 'asin', v: 'asin(' }, { l: 'acos', v: 'acos(' }, { l: 'atan', v: 'atan(' },
@@ -945,14 +963,14 @@ const ConsoleMode: React.FC = () => {
                 { l: 'taylor', v: 'taylor(' }, { l: 'laplace', v: 'laplace(' }, { l: 'fourier', v: 'fourier(' },
               ].map(b => (
                 <button key={b.l} onClick={() => setInput(input + b.v)}
-                  className="px-2 py-2 rounded-none text-xs font-mono font-black bg-white border-2 border-black text-black hover:bg-accent-yellow shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none truncate">
+                  className="px-2 py-2 rounded-2xl text-xs font-mono font-black bg-[#111111] border border-white/10 text-white hover:bg-white/10 shadow-xl transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none truncate">
                   {b.l}
                 </button>
               ))}
 
               {toolbarTab === 'ABC' && 'xyzwabcdefghijk'.split('').map(l => (
                 <button key={l} onClick={() => setInput(input + l)}
-                  className="px-2 py-2 rounded-none text-xs font-mono font-black bg-white border-2 border-black text-black hover:bg-accent-yellow shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
+                  className="px-2 py-2 rounded-2xl text-xs font-mono font-black bg-[#111111] border border-white/10 text-white hover:bg-white/10 shadow-xl transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
                   {l}
                 </button>
               ))}
@@ -966,7 +984,7 @@ const ConsoleMode: React.FC = () => {
                 { l: 'Δ', v: 'Delta' }, { l: 'Σ', v: 'sum' }, { l: 'Π', v: 'product' }, { l: 'Ω', v: 'Omega' },
               ].map(b => (
                 <button key={b.l} onClick={() => setInput(input + b.v)}
-                  className="px-2 py-2 rounded-none text-sm font-serif font-black bg-white border-2 border-black text-black hover:bg-accent-yellow shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
+                  className="px-2 py-2 rounded-2xl text-sm font-serif font-black bg-[#111111] border border-white/10 text-white hover:bg-white/10 shadow-xl transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
                   {b.l}
                 </button>
               ))}
@@ -978,7 +996,7 @@ const ConsoleMode: React.FC = () => {
                 { l: 'R', v: 'R', d: 'Gas' }, { l: 'mₑ', v: 'me', d: 'Electrón' }, { l: 'mₚ', v: 'mp', d: 'Protón' },
               ].map(b => (
                 <button key={b.l} onClick={() => setInput(input + b.v)}
-                  className="px-2 py-2 rounded-none text-xs font-serif font-black bg-white border-2 border-black text-black hover:bg-accent-yellow shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none flex flex-col items-center">
+                  className="px-2 py-2 rounded-2xl text-xs font-serif font-black bg-[#111111] border border-white/10 text-white hover:bg-white/10 shadow-xl transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none flex flex-col items-center">
                   <span className="text-sm leading-none">{b.l}</span>
                   <span className="text-[8px] font-black uppercase leading-none mt-1">{b.d}</span>
                 </button>
@@ -988,9 +1006,9 @@ const ConsoleMode: React.FC = () => {
         )}
 
         {/* ── Input Field ── */}
-        <div className="px-4 pb-6 pt-3 bg-white">
+        <div className="px-4 pb-6 pt-3 bg-[#111111]">
           <div className="relative">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-black font-serif italic text-black">ƒ</div>
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-black font-serif italic text-white">ƒ</div>
             <input
               value={input}
               onChange={(e) => {
@@ -1061,9 +1079,9 @@ const ConsoleMode: React.FC = () => {
                 }
               }}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-              className={`w-full bg-white border-4 border-black rounded-none py-5 pl-12 pr-4 text-xl lg:text-3xl font-mono text-black placeholder:text-black/40 focus:outline-none transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] ${parseError
-                ? 'bg-red-50'
-                : 'bg-white'
+              className={`w-full bg-[#111111] border border-white/10 rounded-2xl py-6 pl-14 pr-4 text-xl lg:text-3xl font-mono text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:bg-white/5 transition-all shadow-xl ${parseError
+                ? 'border-red-500/50 bg-red-500/5'
+                : ''
                 }`}
               placeholder="Escribe una expresión... (ej: derivar(x^2, x))"
               autoFocus
@@ -1071,11 +1089,11 @@ const ConsoleMode: React.FC = () => {
 
             {/* Autocomplete Dropdown */}
             {showSuggestions && suggestions.length > 0 && (
-              <div className="absolute left-0 right-0 bottom-full mb-4 bg-white border-4 border-black rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden z-50">
+              <div className="absolute left-0 right-0 bottom-full mb-4 bg-[#111111] border border-white/10 rounded-2xl shadow-xl overflow-hidden z-50">
                 {suggestions.map((fn, idx) => (
                   <div
                     key={fn.name}
-                    className={`px-4 py-4 cursor-pointer flex justify-between items-center border-b-2 border-black last:border-b-0 ${idx === selectedSuggestion ? 'bg-accent-pink text-black' : 'hover:bg-accent-yellow'
+                    className={`px-4 py-4 cursor-pointer flex justify-between items-center border-b-2 border-white/10 last:border-b-0 ${idx === selectedSuggestion ? 'bg-white/5 text-white' : 'hover:bg-white/10'
                       }`}
                     onMouseDown={() => {
                       const words = input.split(/[\s()+\-*/=,]+/);
@@ -1087,9 +1105,9 @@ const ConsoleMode: React.FC = () => {
                   >
                     <div>
                       <span className="font-black font-mono text-lg">{fn.name}</span>
-                      <span className="text-black/60 ml-2 text-sm font-bold">{fn.syntax}</span>
+                      <span className="text-white/60 ml-2 text-sm font-bold">{fn.syntax}</span>
                     </div>
-                    <span className="text-xs font-black uppercase text-black/40">{fn.description.es}</span>
+                    <span className="text-xs font-black uppercase text-white/40">{fn.description.es}</span>
                   </div>
                 ))}
               </div>
@@ -1097,14 +1115,14 @@ const ConsoleMode: React.FC = () => {
 
             {input && !parseError && !showSuggestions && (
               <div className="absolute right-6 top-1/2 -translate-y-1/2">
-                <MathDisplay expression={input} className="text-black/30 text-sm font-black" />
+                <MathDisplay expression={input} className="text-white/30 text-sm font-black" />
               </div>
             )}
           </div>
 
           {/* Parse Error Display */}
           {parseError && (
-            <div className="mt-4 flex items-center gap-3 text-black text-sm bg-accent-pink px-4 py-3 rounded-none border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <div className="mt-4 flex items-center gap-3 text-white text-sm bg-white/5 px-4 py-3 rounded-2xl border border-white/10 shadow-xl">
               <AlertCircle size={20} className="shrink-0" />
               <span className="font-black uppercase">{parseError}</span>
             </div>

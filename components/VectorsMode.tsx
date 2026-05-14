@@ -250,28 +250,28 @@ const VectorsMode: React.FC = () => {
                 {label}
             </label>
             <div className="flex items-center gap-2">
-                <span className="text-black text-xs">x:</span>
+                <span className="text-white text-xs">x:</span>
                 <input
                     type="number"
                     value={vector.x}
                     onChange={(e) => onChange({ ...vector, x: parseFloat(e.target.value) || 0 })}
-                    className="w-16 bg-white border-2 border-black rounded-none px-2 py-1 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                    className="w-16 bg-[#111111] border border-white/10 rounded-2xl px-2 py-1 text-white font-mono shadow-xl"
                 />
-                <span className="text-black text-xs">y:</span>
+                <span className="text-white text-xs">y:</span>
                 <input
                     type="number"
                     value={vector.y}
                     onChange={(e) => onChange({ ...vector, y: parseFloat(e.target.value) || 0 })}
-                    className="w-16 bg-white border-2 border-black rounded-none px-2 py-1 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                    className="w-16 bg-[#111111] border border-white/10 rounded-2xl px-2 py-1 text-white font-mono shadow-xl"
                 />
                 {dimension === '3d' && 'z' in vector && (
                     <>
-                        <span className="text-black text-xs">z:</span>
+                        <span className="text-white text-xs">z:</span>
                         <input
                             type="number"
                             value={(vector as Vector3D).z}
                             onChange={(e) => onChange({ ...vector, z: parseFloat(e.target.value) || 0 })}
-                            className="w-16 bg-white border-2 border-black rounded-none px-2 py-1 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                            className="w-16 bg-[#111111] border border-white/10 rounded-2xl px-2 py-1 text-white font-mono shadow-xl"
                         />
                     </>
                 )}
@@ -295,17 +295,17 @@ const VectorsMode: React.FC = () => {
         ];
 
     return (
-        <div className="flex flex-col h-full bg-white">
+        <div className="flex flex-col h-full bg-[#111111]">
             {/* Header */}
-            <div className="flex items-center gap-2 p-3 bg-white border-b-2 border-black">
-                <span className="text-xs text-black uppercase tracking-wider mr-2">Dimensión:</span>
+            <div className="flex items-center gap-2 p-3 bg-[#111111] border-b-2 border-white/10">
+                <span className="text-xs text-white uppercase tracking-wider mr-2">Dimensión:</span>
                 {(['2d', '3d'] as const).map(dim => (
                     <button
                         key={dim}
                         onClick={() => setDimension(dim)}
-                        className={`px-4 py-2 rounded-none text-sm font-black transition-all border-2 border-black ${dimension === dim
-                            ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                            : 'bg-white hover:bg-gray-100 text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                        className={`px-4 py-2 rounded-2xl text-sm font-black transition-all border border-white/10 ${dimension === dim
+                            ? 'bg-primary text-white shadow-xl'
+                            : 'bg-[#111111] hover:bg-gray-100 text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                             }`}
                     >
                         {dim.toUpperCase()}
@@ -315,8 +315,8 @@ const VectorsMode: React.FC = () => {
 
             <div className="flex-1 flex overflow-hidden">
                 {/* Input Panel */}
-                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-black">
-                    <h2 className="text-xl font-bold text-black mb-4">🎯 Vectores {dimension.toUpperCase()}</h2>
+                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-white/10">
+                    <h2 className="text-xl font-bold text-white mb-4">🎯 Vectores {dimension.toUpperCase()}</h2>
 
                     {/* Vector Inputs */}
                     {dimension === '2d' ? (
@@ -333,15 +333,15 @@ const VectorsMode: React.FC = () => {
 
                     {/* Operation Selector */}
                     <div className="mb-4">
-                        <label className="text-xs text-black uppercase font-bold block mb-2">Operación</label>
+                        <label className="text-xs text-white uppercase font-bold block mb-2">Operación</label>
                         <div className="flex flex-wrap gap-2">
                             {operations.map(op => (
                             <button
                             key={op.id}
                             onClick={() => setOperation(op.id)}
-                            className={`px-3 py-2 rounded-none text-sm font-black transition-all border-2 border-black ${operation === op.id
-                                ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                                : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                            className={`px-3 py-2 rounded-2xl text-sm font-black transition-all border border-white/10 ${operation === op.id
+                                ? 'bg-primary text-white shadow-xl'
+                                : 'bg-[#111111] text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                                 }`}
                             >
                             {op.label}
@@ -353,19 +353,19 @@ const VectorsMode: React.FC = () => {
                             {/* Scalar Input */}
                             {operation === 'scale' && (
                             <div className="mb-4">
-                            <label className="text-xs text-black uppercase font-bold block mb-2">Escalar (k)</label>
+                            <label className="text-xs text-white uppercase font-bold block mb-2">Escalar (k)</label>
                             <input
                             type="number"
                             value={scalar}
                             onChange={(e) => setScalar(parseFloat(e.target.value) || 0)}
-                            className="w-24 bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                            className="w-24 bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono shadow-xl"
                             />
                             </div>
                             )}
 
                             <button
                             onClick={calculate}
-                            className="w-full py-3 bg-primary text-white font-black rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
+                            className="w-full py-3 bg-primary text-white font-black rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
                             >
                             <Calculator size={18} />
                             Calcular
@@ -376,8 +376,8 @@ const VectorsMode: React.FC = () => {
                             <div className="hidden lg:flex w-1/2 p-6 flex-col gap-4">
                             {/* Result */}
                             {(result2D || result3D || scalarResult !== null) && (
-                            <div className="p-4 bg-white border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <div className="text-xs text-black uppercase mb-1">Resultado</div>
+                            <div className="p-4 bg-[#111111] border border-white/10 rounded-2xl shadow-xl">
+                            <div className="text-xs text-white uppercase mb-1">Resultado</div>
                             <div className="text-2xl font-bold text-primary font-mono">
                             {scalarResult !== null ? (
                             scalarResult.toFixed(4)
@@ -391,9 +391,9 @@ const VectorsMode: React.FC = () => {
                             )}
                     {/* Properties */}
                     {properties.length > 0 && (
-                        <div className="bg-white border-2 border-black rounded-none p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <h4 className="text-sm font-bold text-black uppercase mb-2">Propiedades</h4>
-                            <ul className="space-y-1 text-sm font-mono text-black">
+                        <div className="bg-[#111111] border border-white/10 rounded-2xl p-4 shadow-xl">
+                            <h4 className="text-sm font-bold text-white uppercase mb-2">Propiedades</h4>
+                            <ul className="space-y-1 text-sm font-mono text-white">
                                 {properties.map((prop, i) => (
                                     <li key={i}>› {prop}</li>
                                 ))}
@@ -403,10 +403,10 @@ const VectorsMode: React.FC = () => {
 
                     {/* Visualization */}
                     {dimension === '2d' && (
-                        <div className="flex-1 bg-white border-2 border-black rounded-none overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <div className="p-2 border-b-2 border-black flex items-center gap-2">
-                                <Eye size={14} className="text-black" />
-                                <span className="text-xs text-black uppercase font-bold">Visualización</span>
+                        <div className="flex-1 bg-[#111111] border border-white/10 rounded-2xl overflow-hidden shadow-xl">
+                            <div className="p-2 border-b-2 border-white/10 flex items-center gap-2">
+                                <Eye size={14} className="text-white" />
+                                <span className="text-xs text-white uppercase font-bold">Visualización</span>
                             </div>
                             <canvas
                                 ref={canvasRef}

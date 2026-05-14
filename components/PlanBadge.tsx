@@ -13,24 +13,24 @@ const PlanBadge: React.FC<PlanBadgeProps> = ({ status, onClick }) => {
 
     const getPlanColor = (plan: string) => {
         switch (plan) {
-            case 'elite': return 'bg-pink-400 text-black border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]';
-            case 'pro': return 'bg-blue-400 text-black border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]';
-            case 'free': default: return 'bg-white text-black border-2 border-black shadow-[2px_2px_0px_0_rgba(0,0,0,1)]';
+            case 'elite': return 'bg-pink-400 text-white border border-white/10 shadow-xl';
+            case 'pro': return 'bg-blue-400 text-white border border-white/10 shadow-xl';
+            case 'free': default: return 'bg-[#111111] text-white border border-white/10 shadow-xl';
         }
     };
 
     const getIcon = (plan: string) => {
         switch (plan) {
             case 'elite': return <Crown size={12} className="fill-black" />;
-            case 'pro': return <Sparkles size={12} className="text-black" />;
-            case 'free': default: return <User size={12} className="text-black" />;
+            case 'pro': return <Sparkles size={12} className="text-white" />;
+            case 'free': default: return <User size={12} className="text-white" />;
         }
     };
 
     return (
         <button
             onClick={onClick}
-            className={`flex items-center gap-2 px-2 py-1 rounded-none border-2 transition-all hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] text-xs font-bold ${getPlanColor(effectivePlan)}`}
+            className={`flex items-center gap-2 px-2 py-1 rounded-2xl border transition-all hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] text-xs font-bold ${getPlanColor(effectivePlan)}`}
         >
             {getIcon(effectivePlan)}
             <span className="uppercase tracking-wider">{effectivePlan}</span>

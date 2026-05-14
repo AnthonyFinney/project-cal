@@ -50,24 +50,24 @@ const PTISimulator: React.FC = () => {
     }, []);
 
     return (
-        <div className="flex-1 h-full overflow-y-auto bg-white p-4 md:p-8 animate-in fade-in duration-700">
+        <div className="flex-1 h-full overflow-y-auto bg-[#111111] p-4 md:p-8 animate-in fade-in duration-700">
             <div className="max-w-7xl mx-auto space-y-6">
                 
                 {/* Header Séptima */}
-                <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b-2 border-black pb-6">
+                <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b-2 border-white/10 pb-6">
                     <div>
-                        <div className="flex items-center gap-2 text-black mb-1">
+                        <div className="flex items-center gap-2 text-white mb-1">
                             <Activity size={20} className="animate-pulse" />
                             <span className="text-xs font-bold uppercase tracking-widest">Bio-Simulation Mode</span>
                         </div>
-                        <h1 className="text-3xl font-bold text-black">Séptima: Párpura Trombocitopénica Inmune</h1>
-                        <p className="text-black font-medium">Simulación dinámica de homeóstasis plaquetaria - Caso José (12 años)</p>
+                        <h1 className="text-3xl font-bold text-white">Séptima: Párpura Trombocitopénica Inmune</h1>
+                        <p className="text-white font-medium">Simulación dinámica de homeóstasis plaquetaria - Caso José (12 años)</p>
                     </div>
                     
                     <button 
                         onClick={runSimulation}
                         disabled={loading}
-                        className="flex items-center gap-2 px-6 py-3 bg-primary text-black border-2 border-black rounded-none font-bold transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] disabled:opacity-50"
+                        className="flex items-center gap-2 px-6 py-3 bg-primary text-white border border-white/10 rounded-2xl font-bold transition-all shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] disabled:opacity-50"
                     >
                         {loading ? <RefreshCw className="animate-spin" size={20} /> : <Play size={20} />}
                         Ejecutar Simulación
@@ -87,8 +87,8 @@ const PTISimulator: React.FC = () => {
 
                     {/* Panel Central: Gráfica y Datos */}
                     <div className="lg:col-span-3 space-y-6">
-                        <div className="bg-white border-2 border-black rounded-none p-6 min-h-[400px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <h3 className="text-lg font-bold text-black mb-6 flex items-center gap-2">
+                        <div className="bg-[#111111] border border-white/10 rounded-2xl p-6 min-h-[400px] shadow-xl">
+                            <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                                 <Heart className="text-red-600" size={20} />
                                 Dinámica de Plaquetas (30 días)
                             </h3>

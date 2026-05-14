@@ -11,6 +11,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.93.1",
     "animejs": "3.2.2",
+    "framer-motion": "^12.38.0",
     "katex": "0.16.9",
     "lucide-react": "0.263.1",
     "nerdamer": "1.1.13",

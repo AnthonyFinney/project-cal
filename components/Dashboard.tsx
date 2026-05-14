@@ -46,23 +46,23 @@ const Dashboard: React.FC = () => {
     const worksheetsPercent = getUsagePercent(worksheets_count, worksheets_limit);
 
     // Dynamic color based on plan
-    const planColor = plan === 'elite' ? 'bg-accent-pink' :
-        plan === 'pro' ? 'bg-accent-yellow' :
+    const planColor = plan === 'elite' ? 'bg-white/5' :
+        plan === 'pro' ? 'bg-white/10' :
             'bg-background-dark';
 
     return (
-        <div className="flex-1 h-full overflow-y-auto bg-white p-6 md:p-10 animate-in fade-in slide-in-from-bottom-4">
+        <div className="flex-1 h-full overflow-y-auto bg-[#111111] p-6 md:p-10 animate-in fade-in slide-in-from-bottom-4">
             <div className="max-w-7xl mx-auto space-y-8 pb-10">
 
                 {/* Header Section */}
-                <header className="flex justify-between items-end border-b-4 border-black pb-6">
+                <header className="flex justify-between items-end border-b-4 border-white/10 pb-6">
                     <div>
-                        <h1 className="text-4xl font-black text-black mb-2 tracking-tight uppercase">Dashboard</h1>
-                        <p className="text-black text-lg font-bold">Your command center for symbolic computation.</p>
+                        <h1 className="text-4xl font-black text-white mb-2 tracking-tight uppercase">Dashboard</h1>
+                        <p className="text-white text-lg font-bold">Your command center for symbolic computation.</p>
                     </div>
                     <div className="text-right hidden md:block">
-                        <p className="text-sm font-black uppercase text-black">Billing Cycle Resets</p>
-                        <p className="text-black font-mono font-bold">{new Date(planStatus.period_end).toLocaleDateString()}</p>
+                        <p className="text-sm font-black uppercase text-white">Billing Cycle Resets</p>
+                        <p className="text-white font-mono font-bold">{new Date(planStatus.period_end).toLocaleDateString()}</p>
                     </div>
                 </header>
 
@@ -71,17 +71,17 @@ const Dashboard: React.FC = () => {
                     {/* LEFT COLUMN: Plan Status & Upsell */}
                     <div className="space-y-6">
                         {/* Current Plan Card */}
-                        <div className="bg-white border-4 border-black rounded-none p-8 relative overflow-hidden group shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                        <div className="bg-[#111111] border border-white/10 rounded-2xl p-8 relative overflow-hidden group shadow-xl">
                             <div className="relative z-10">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <div className={`p-4 rounded-none border-2 border-black ${planColor} shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
-                                        {plan === 'elite' ? <Crown size={32} className="text-black" /> :
-                                            plan === 'pro' ? <Sparkles size={32} className="text-black" /> :
-                                                <Zap size={32} className="text-black" />}
+                                    <div className={`p-4 rounded-2xl border border-white/10 ${planColor} shadow-xl`}>
+                                        {plan === 'elite' ? <Crown size={32} className="text-white" /> :
+                                            plan === 'pro' ? <Sparkles size={32} className="text-white" /> :
+                                                <Zap size={32} className="text-white" />}
                                     </div>
                                     <div>
-                                        <p className="text-black text-xs uppercase tracking-widest font-black">Current Plan</p>
-                                        <h2 className="text-3xl font-black text-black uppercase">{plan} License</h2>
+                                        <p className="text-white text-xs uppercase tracking-widest font-black">Current Plan</p>
+                                        <h2 className="text-3xl font-black text-white uppercase">{plan} License</h2>
                                     </div>
                                 </div>
 
@@ -93,7 +93,7 @@ const Dashboard: React.FC = () => {
 
                                 <button
                                     onClick={() => setShowUpgradeModal(true)}
-                                    className="w-full py-4 bg-primary border-2 border-black rounded-none text-white font-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                                    className="w-full py-4 bg-primary border border-white/10 rounded-2xl text-white font-black uppercase shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                                 >
                                     Manage Subscription
                                 </button>
@@ -102,12 +102,12 @@ const Dashboard: React.FC = () => {
 
                         {/* Upgrade Prompt (Only for Free/Pro) */}
                         {plan !== 'elite' && (
-                            <div className="bg-accent-yellow border-4 border-black rounded-none p-8 relative overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                                <h3 className="text-2xl font-black text-black mb-2 uppercase tracking-tighter">Unlock More Power</h3>
-                                <p className="text-black text-sm font-bold mb-6">Upgrade to {plan === 'free' ? 'Pro' : 'Elite'} for higher limits and faster processing.</p>
+                            <div className="bg-white/10 border border-white/10 rounded-2xl p-8 relative overflow-hidden shadow-xl">
+                                <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tighter">Unlock More Power</h3>
+                                <p className="text-white text-sm font-bold mb-6">Upgrade to {plan === 'free' ? 'Pro' : 'Elite'} for higher limits and faster processing.</p>
                                 <button
                                     onClick={() => setShowUpgradeModal(true)}
-                                    className="flex items-center gap-2 text-black font-black uppercase hover:underline group"
+                                    className="flex items-center gap-2 text-white font-black uppercase hover:underline group"
                                 >
                                     View Plans <ArrowRight size={20} strokeWidth={3} className="group-hover:translate-x-1 transition-transform" />
                                 </button>
@@ -137,9 +137,9 @@ const Dashboard: React.FC = () => {
                         </div>
 
                         {/* Analytic Chart */}
-                        <div className="bg-white border-4 border-black rounded-none p-8 h-96 flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                            <h3 className="text-xl font-black text-black mb-6 flex items-center gap-2 uppercase tracking-tight">
-                                <span className="w-2 h-8 bg-accent-pink rounded-none border-2 border-black"></span>
+                        <div className="bg-[#111111] border border-white/10 rounded-2xl p-8 h-96 flex flex-col shadow-xl">
+                            <h3 className="text-xl font-black text-white mb-6 flex items-center gap-2 uppercase tracking-tight">
+                                <span className="w-2 h-8 bg-white/5 rounded-2xl border border-white/10"></span>
                                 Usage Analytics
                             </h3>
                             <div className="flex-1 w-full min-h-0">
@@ -182,7 +182,7 @@ const Dashboard: React.FC = () => {
 
 // Sub-components for cleaner code
 const FeatureRow = ({ icon: Icon, text, active }: { icon: any, text: string, active: boolean }) => (
-    <div className={`flex items-center gap-3 ${active ? 'text-black' : 'text-black/50'}`}>
+    <div className={`flex items-center gap-3 ${active ? 'text-white' : 'text-white/50'}`}>
         <Icon size={18} />
         <span className="text-sm font-medium">{text}</span>
         {active && <CheckCircle size={14} className="text-primary ml-auto" />}
@@ -190,20 +190,20 @@ const FeatureRow = ({ icon: Icon, text, active }: { icon: any, text: string, act
 );
 
 const UsageCard = ({ title, used, limit, percent, icon }: { title: string, used: number, limit: number | null, percent: number, icon: any }) => (
-    <div className="bg-white border-2 border-black rounded-none p-6 relative overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+    <div className="bg-[#111111] border border-white/10 rounded-2xl p-6 relative overflow-hidden shadow-xl">
         <div className="flex justify-between items-start mb-4">
-            <div className="p-2 bg-white border border-black rounded-none text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">{icon}</div>
-            <span className={`text-xs font-bold px-2 py-1 rounded-none border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${percent >= 100 ? 'bg-red-200 text-red-800' : 'bg-green-200 text-green-800'}`}>
+            <div className="p-2 bg-[#111111] border border-white/10 rounded-2xl text-white shadow-xl">{icon}</div>
+            <span className={`text-xs font-bold px-2 py-1 rounded-2xl border border-white/10 shadow-xl ${percent >= 100 ? 'bg-red-200 text-red-800' : 'bg-green-200 text-green-800'}`}>
                 {percent.toFixed(0)}%
             </span>
         </div>
-        <h3 className="text-black/60 text-sm font-medium mb-1">{title}</h3>
-        <p className="text-3xl font-bold text-black mb-4">
-            {used} <span className="text-lg text-black/40">/ {limit === null ? '∞' : limit}</span>
+        <h3 className="text-white/60 text-sm font-medium mb-1">{title}</h3>
+        <p className="text-3xl font-bold text-white mb-4">
+            {used} <span className="text-lg text-white/40">/ {limit === null ? '∞' : limit}</span>
         </p>
-        <div className="w-full h-3 bg-white border border-black rounded-none overflow-hidden">
+        <div className="w-full h-3 bg-[#111111] border border-white/10 rounded-2xl overflow-hidden">
             <div
-                className={`h-full border-r border-black transition-all duration-1000 ${percent > 90 ? 'bg-red-500' : 'bg-primary'}`}
+                className={`h-full border-r border-white/10 transition-all duration-1000 ${percent > 90 ? 'bg-red-500' : 'bg-primary'}`}
                 style={{ width: `${percent}%` }}
             />
         </div>

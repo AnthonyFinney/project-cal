@@ -51,13 +51,13 @@ const Sidebar: React.FC<SidebarProps> = ({ currentMode, setMode }) => {
   ];
 
   return (
-    <aside className="w-16 lg:w-64 bg-background border-r-4 border-black flex flex-col py-6 shrink-0 z-40 h-full overflow-y-auto custom-scrollbar">
-      <div className="flex items-center gap-3 px-4 lg:px-6 mb-8 text-black shrink-0 group cursor-pointer" onClick={() => setMode(AppMode.CONSOLE)}>
-        <div className="size-10 border-2 border-black bg-accent-yellow flex items-center justify-center text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-hover:shadow-none transition-all">
+    <aside className="w-16 lg:w-64 bg-background border-r-4 border-white/10 flex flex-col py-6 shrink-0 z-40 h-full overflow-y-auto custom-scrollbar">
+      <div className="flex items-center gap-3 px-4 lg:px-6 mb-8 text-white shrink-0 group cursor-pointer" onClick={() => setMode(AppMode.CONSOLE)}>
+        <div className="size-10 border border-white/10 bg-white/10 flex items-center justify-center text-white shadow-xl group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-hover:shadow-none transition-all">
           <span className="font-serif text-2xl italic font-bold">∫</span>
         </div>
         <div className="hidden lg:block relative">
-          <h1 className="text-lg font-black tracking-tighter text-black leading-none uppercase">CAS</h1>
+          <h1 className="text-lg font-black tracking-tighter text-white leading-none uppercase">CAS</h1>
           <h1 className="text-lg font-black tracking-tighter text-primary leading-none uppercase">Cal</h1>
         </div>
       </div>
@@ -67,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentMode, setMode }) => {
         {groups.map((group, groupIndex) => (
           <div key={groupIndex}>
             {group.title && group.title !== 'Núcleo' && (
-              <h3 className="px-3 mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-black hidden lg:block">
+              <h3 className="px-3 mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-white hidden lg:block">
                 {group.title}
               </h3>
             )}
@@ -82,16 +82,16 @@ const Sidebar: React.FC<SidebarProps> = ({ currentMode, setMode }) => {
                   <button
                     key={item.mode}
                     onClick={() => setMode(item.mode)}
-                    className={`flex items-center gap-3 px-3 py-3 border-2 border-black transition-all duration-100 group relative overflow-hidden text-left
+                    className={`flex items-center gap-3 px-3 py-3 border border-white/10 transition-all duration-100 group relative overflow-hidden text-left
                       ${isActive
-                        ? 'bg-accent-yellow shadow-none translate-x-[2px] translate-y-[2px]'
+                        ? 'bg-white/10 shadow-none translate-x-[2px] translate-y-[2px]'
                         : isHighlight
-                          ? 'bg-accent-pink text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
-                          : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
+                          ? 'bg-white/5 text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl'
+                          : 'bg-[#111111] text-white shadow-xl hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-xl'
                       }
                     `}
                   >
-                    <div className={`relative ${isActive || isHighlight ? 'text-black' : ''}`}>
+                    <div className={`relative ${isActive || isHighlight ? 'text-white' : ''}`}>
                       <Icon
                         size={20}
                         strokeWidth={isActive ? 3 : 2}
@@ -119,7 +119,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentMode, setMode }) => {
       <div className="mt-6 px-3 shrink-0">
         <button
           onClick={() => window.open('https://github.com/AldraAV/CASCal', '_blank')}
-          className="w-full flex items-center gap-3 px-3 py-3 border-2 border-black bg-accent-green text-black font-black uppercase text-xs shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+          className="w-full flex items-center gap-3 px-3 py-3 border border-white/10 bg-white/5 text-white font-black uppercase text-xs shadow-xl hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
         >
           <GraduationCap size={20} strokeWidth={2.5} />
           <span className="hidden lg:block">Feedback & Docs</span>

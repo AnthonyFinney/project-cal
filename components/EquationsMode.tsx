@@ -55,7 +55,7 @@ const EquationsMode: React.FC = () => {
             const fullEq = `${eq.lhs}-(${eq.rhs})`;
 
             // Solve using Nerdamer
-            const solutions = nerdamer.solve(fullEq, variable);
+            const solutions = (nerdamer as any).solve(fullEq, variable);
             const solutionStr = solutions.toString();
 
             // Parse solutions
@@ -92,7 +92,7 @@ const EquationsMode: React.FC = () => {
             const vars = variable.split(',').map(v => v.trim());
 
             // Nerdamer solve system
-            const solution = nerdamer.solveEquations(eqs, vars);
+            const solution = (nerdamer as any).solveEquations(eqs, vars);
 
             setSteps([
                 'Sistema de ecuaciones:',
@@ -122,7 +122,7 @@ const EquationsMode: React.FC = () => {
             ]);
 
             // Find critical points (where expression = 0)
-            const solutions = nerdamer.solve(fullExpr, variable);
+            const solutions = (nerdamer as any).solve(fullExpr, variable);
             const criticalPoints = solutions.toString()
                 .replace('[', '')
                 .replace(']', '')
@@ -161,10 +161,10 @@ const EquationsMode: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-full bg-white">
+        <div className="flex flex-col h-full bg-[#111111]">
             {/* Type Selector */}
-            <div className="flex items-center gap-2 p-3 bg-white border-b-2 border-black">
-                <span className="text-xs text-black uppercase tracking-wider mr-2 font-black">Tipo:</span>
+            <div className="flex items-center gap-2 p-3 bg-[#111111] border-b-2 border-white/10">
+                <span className="text-xs text-white uppercase tracking-wider mr-2 font-black">Tipo:</span>
                 {(['single', 'system', 'inequality'] as const).map(type => (
                     <button
                         key={type}
@@ -186,9 +186,9 @@ const EquationsMode: React.FC = () => {
                             setResult(null);
                             setSteps([]);
                         }}
-                        className={`px-4 py-2 rounded-none text-sm font-black transition-all border-2 border-black ${eqType === type
-                            ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                            : 'bg-white hover:bg-gray-100 text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                        className={`px-4 py-2 rounded-2xl text-sm font-black transition-all border border-white/10 ${eqType === type
+                            ? 'bg-primary text-white shadow-xl'
+                            : 'bg-[#111111] hover:bg-gray-100 text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                             }`}
                     >
                         {type === 'single' && 'Ecuación'}
@@ -200,8 +200,8 @@ const EquationsMode: React.FC = () => {
 
             <div className="flex-1 flex overflow-hidden">
                 {/* Input Panel */}
-                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-black">
-                    <h2 className="text-xl font-black text-black mb-4">
+                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-white/10">
+                    <h2 className="text-xl font-black text-white mb-4">
                         {eqType === 'single' && '📐 Resolver Ecuación'}
                         {eqType === 'system' && '📊 Resolver Sistema'}
                         {eqType === 'inequality' && '⚖️ Analizar Desigualdad'}
@@ -212,15 +212,15 @@ const EquationsMode: React.FC = () => {
                         {equations.map((eq, idx) => (
                             <div key={eq.id} className="flex items-center gap-2">
                                 {eqType === 'system' && (
-                                    <span className="text-black/60 text-xs w-8 font-black">({idx + 1})</span>
+                                    <span className="text-white/60 text-xs w-8 font-black">({idx + 1})</span>
                                 )}
-                                <div className="flex-1 flex items-center gap-2 bg-white border-2 border-black rounded-none p-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                <div className="flex-1 flex items-center gap-2 bg-[#111111] border border-white/10 rounded-2xl p-2 shadow-xl">
                                     <input
                                         type="text"
                                         value={eq.lhs}
                                         onChange={(e) => updateEquation(eq.id, 'lhs', e.target.value)}
                                         placeholder="x^2 + 2x"
-                                        className="flex-1 bg-transparent text-black font-mono focus:outline-none"
+                                        className="flex-1 bg-transparent text-white font-mono focus:outline-none"
                                     />
                                     <span className="text-primary font-black">
                                         {eqType === 'inequality' ? '>' : '='}
@@ -230,13 +230,13 @@ const EquationsMode: React.FC = () => {
                                         value={eq.rhs}
                                         onChange={(e) => updateEquation(eq.id, 'rhs', e.target.value)}
                                         placeholder="0"
-                                        className="w-24 bg-transparent text-black font-mono focus:outline-none text-right"
+                                        className="w-24 bg-transparent text-white font-mono focus:outline-none text-right"
                                     />
                                 </div>
                                 {equations.length > 1 && (
                                     <button
                                         onClick={() => removeEquation(eq.id)}
-                                        className="text-red-600 hover:text-red-500 border-2 border-black p-1 bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
+                                        className="text-red-600 hover:text-red-500 border border-white/10 p-1 bg-[#111111] shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
                                     >
                                         <Trash2 size={16} />
                                     </button>
@@ -248,7 +248,7 @@ const EquationsMode: React.FC = () => {
                     {eqType === 'system' && (
                         <button
                             onClick={addEquation}
-                            className="text-primary hover:text-black font-black text-sm flex items-center gap-1 mb-6"
+                            className="text-primary hover:text-white font-black text-sm flex items-center gap-1 mb-6"
                         >
                             <Plus size={14} /> Añadir ecuación
                         </button>
@@ -256,21 +256,21 @@ const EquationsMode: React.FC = () => {
 
                     {/* Variable Input */}
                     <div className="mb-6">
-                        <label className="text-xs text-black uppercase font-black block mb-1">
+                        <label className="text-xs text-white uppercase font-black block mb-1">
                             {eqType === 'system' ? 'Variables (separadas por coma)' : 'Variable'}
                         </label>
                         <input
                             type="text"
                             value={variable}
                             onChange={(e) => setVariable(e.target.value)}
-                            className="w-full bg-white border-2 border-black rounded-none px-4 py-2 text-black font-mono focus:outline-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                            className="w-full bg-[#111111] border border-white/10 rounded-2xl px-4 py-2 text-white font-mono focus:outline-none shadow-xl"
                         />
                     </div>
 
                     {/* Solve Button */}
                     <button
                         onClick={solve}
-                        className="w-full py-3 bg-primary text-white font-black rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
+                        className="w-full py-3 bg-primary text-white font-black rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
                     >
                         <Play size={18} />
                         Resolver
@@ -279,13 +279,13 @@ const EquationsMode: React.FC = () => {
 
                 {/* Result Panel */}
                 <div className="hidden lg:flex w-1/2 p-6 flex-col">
-                    <h3 className="text-lg font-black text-black mb-4 flex items-center gap-2">
+                    <h3 className="text-lg font-black text-white mb-4 flex items-center gap-2">
                         <ArrowRight size={20} className="text-primary" />
                         Solución
                     </h3>
 
                     {error && (
-                        <div className="p-4 bg-red-200 border-2 border-red-800 text-red-800 rounded-none font-bold mb-4">
+                        <div className="p-4 bg-red-200 border border-red-800 text-red-800 rounded-2xl font-bold mb-4">
                             {error}
                         </div>
                     )}
@@ -293,17 +293,17 @@ const EquationsMode: React.FC = () => {
                     {result ? (
                         <div className="flex-1 flex flex-col gap-4">
                             {/* Big Result */}
-                            <div className="p-6 bg-white border-4 border-black rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                            <div className="p-6 bg-[#111111] border border-white/10 rounded-2xl shadow-xl">
                                 <MathDisplay expression={result} />
                             </div>
 
                             {/* Steps */}
                             {steps.length > 0 && (
-                                <div className="flex-1 bg-white border-2 border-black rounded-none p-4 overflow-y-auto shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                    <h4 className="text-sm font-black text-black/60 uppercase mb-3">Pasos</h4>
+                                <div className="flex-1 bg-[#111111] border border-white/10 rounded-2xl p-4 overflow-y-auto shadow-xl">
+                                    <h4 className="text-sm font-black text-white/60 uppercase mb-3">Pasos</h4>
                                     <ul className="space-y-2 text-sm font-mono">
                                         {steps.map((step, i) => (
-                                            <li key={i} className="text-black flex items-start gap-2">
+                                            <li key={i} className="text-white flex items-start gap-2">
                                                 <span className="text-primary font-black">{i + 1}.</span>
                                                 {step}
                                             </li>
@@ -313,7 +313,7 @@ const EquationsMode: React.FC = () => {
                             )}
                         </div>
                     ) : (
-                        <div className="flex-1 flex items-center justify-center text-black/40">
+                        <div className="flex-1 flex items-center justify-center text-white/40">
                             <div className="text-center">
                                 <X size={48} className="mx-auto mb-4 opacity-20" />
                                 <p className="font-bold">Ingresa una ecuación y presiona Resolver</p>

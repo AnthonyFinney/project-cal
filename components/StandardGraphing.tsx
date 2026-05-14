@@ -469,13 +469,13 @@ const StandardGraphing: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col lg:flex-row h-full bg-white text-black overflow-hidden font-sans">
+        <div className="flex flex-col lg:flex-row h-full bg-[#111111] text-white overflow-hidden font-sans">
 
             {/* Sidebar - Function List */}
-            <div className="w-full lg:w-80 bg-white border-r-4 border-black flex flex-col shrink-0">
-                <div className="p-4 border-b-4 border-black bg-white">
-                    <h2 className="text-sm font-black uppercase tracking-tighter flex items-center gap-2 text-black">
-                        <span className="text-black bg-primary px-1 border-2 border-black">f(x)</span> Functions
+            <div className="w-full lg:w-80 bg-[#111111] border-r-4 border-white/10 flex flex-col shrink-0">
+                <div className="p-4 border-b-4 border-white/10 bg-[#111111]">
+                    <h2 className="text-sm font-black uppercase tracking-tighter flex items-center gap-2 text-white">
+                        <span className="text-white bg-primary px-1 border border-white/10">f(x)</span> Functions
                     </h2>
                 </div>
 
@@ -484,38 +484,38 @@ const StandardGraphing: React.FC = () => {
                     {functions.map(fn => (
                         <div
                             key={fn.id}
-                            className={`p-3 rounded-none border-2 transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${fn.visible ? 'bg-white border-black' : 'bg-gray-100 border-black opacity-60'
+                            className={`p-3 rounded-2xl border transition-all shadow-xl ${fn.visible ? 'bg-[#111111] border-white/10' : 'bg-gray-100 border-white/10 opacity-60'
                                 }`}
                         >
                             <div className="flex items-center gap-3">
                                 <button
                                     onClick={() => toggleVisibility(fn.id)}
-                                    className="size-5 rounded-none shrink-0 border-2 border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                                    className="size-5 rounded-2xl shrink-0 border border-white/10 shadow-xl"
                                     style={{
                                         backgroundColor: fn.visible ? fn.color : 'transparent',
                                     }}
                                     title="Toggle visibility"
                                 />
-                                <span className="flex-1 font-mono text-sm truncate font-black text-black">
+                                <span className="flex-1 font-mono text-sm truncate font-black text-white">
                                     y = {fn.expression}
                                 </span>
                                 <button
                                     onClick={() => toggleDerivative(fn.id)}
-                                    className={`p-1 transition-colors rounded-none border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] ${fn.showDerivative ? 'text-black bg-primary' : 'text-black bg-white hover:bg-primary'}`}
+                                    className={`p-1 transition-colors rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] ${fn.showDerivative ? 'text-white bg-primary' : 'text-white bg-[#111111] hover:bg-primary'}`}
                                     title="Show f'(x)"
                                 >
                                     <TrendingUp size={16} />
                                 </button>
                                 <button
                                     onClick={() => removeFunction(fn.id)}
-                                    className="p-1 text-black hover:bg-red-500 border-2 border-transparent hover:border-black transition-all"
+                                    className="p-1 text-white hover:bg-red-500 border border-transparent hover:border-white/10 transition-all"
                                     title="Delete"
                                 >
                                     <Trash2 size={16} />
                                 </button>
                             </div>
                             {fn.showDerivative && (
-                                <div className="mt-2 pl-7 text-xs text-black font-mono font-black flex items-center gap-1">
+                                <div className="mt-2 pl-7 text-xs text-white font-mono font-black flex items-center gap-1">
                                     <span style={{ color: fn.color }} className="font-black">---</span> f'(x)
                                 </div>
                             )}
@@ -524,7 +524,7 @@ const StandardGraphing: React.FC = () => {
                 </div>
 
                 {/* Add Function */}
-                <div className="p-3 border-t-4 border-black bg-white">
+                <div className="p-3 border-t-4 border-white/10 bg-[#111111]">
                     <div className="flex gap-2">
                         <input
                             type="text"
@@ -532,11 +532,11 @@ const StandardGraphing: React.FC = () => {
                             onChange={e => setNewExpression(e.target.value)}
                             onKeyDown={e => e.key === 'Enter' && addFunction()}
                             placeholder="e.g., x^2 + 2*x"
-                            className="flex-1 px-3 py-2 bg-white border-2 border-black rounded-none text-sm font-mono font-bold focus:bg-yellow-50 focus:outline-none text-black placeholder:text-gray-500"
+                            className="flex-1 px-3 py-2 bg-[#111111] border border-white/10 rounded-2xl text-sm font-mono font-bold focus:bg-yellow-50 focus:outline-none text-white placeholder:text-gray-500"
                         />
                         <button
                             onClick={addFunction}
-                            className="px-3 py-2 bg-primary text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                            className="px-3 py-2 bg-primary text-white border border-white/10 rounded-2xl shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                         >
                             <Plus size={20} />
                         </button>
@@ -544,16 +544,16 @@ const StandardGraphing: React.FC = () => {
                 </div>
 
                 {/* Integral Calculator */}
-                <div className="p-3 border-t-4 border-black bg-white">
+                <div className="p-3 border-t-4 border-white/10 bg-[#111111]">
                     <div className="flex items-center gap-2 mb-3">
-                        <Calculator size={16} className="text-black" />
-                        <span className="text-xs font-black uppercase tracking-tighter text-black">Definite Integral</span>
+                        <Calculator size={16} className="text-white" />
+                        <span className="text-xs font-black uppercase tracking-tighter text-white">Definite Integral</span>
                     </div>
 
                     <select
                         value={integralFnId}
                         onChange={e => setIntegralFnId(e.target.value)}
-                        className="w-full px-3 py-2 bg-white border-2 border-black rounded-none text-sm mb-3 focus:bg-yellow-50 focus:outline-none text-black font-black appearance-none"
+                        className="w-full px-3 py-2 bg-[#111111] border border-white/10 rounded-2xl text-sm mb-3 focus:bg-yellow-50 focus:outline-none text-white font-black appearance-none"
                     >
                         <option value="">Select function...</option>
                         {functions.filter(f => f.visible).map(fn => (
@@ -563,33 +563,33 @@ const StandardGraphing: React.FC = () => {
 
                     <div className="flex gap-2 mb-3">
                         <div className="flex-1">
-                            <label className="text-[10px] text-black uppercase font-black mb-1 block">From (a)</label>
+                            <label className="text-[10px] text-white uppercase font-black mb-1 block">From (a)</label>
                             <input
                                 type="text"
                                 value={integralA}
                                 onChange={e => setIntegralA(e.target.value)}
                                 placeholder="0"
-                                className="w-full px-2 py-1.5 bg-white border-2 border-black rounded-none text-sm font-mono font-bold focus:bg-yellow-50 focus:outline-none text-black"
+                                className="w-full px-2 py-1.5 bg-[#111111] border border-white/10 rounded-2xl text-sm font-mono font-bold focus:bg-yellow-50 focus:outline-none text-white"
                             />
                         </div>
                         <div className="flex-1">
-                            <label className="text-[10px] text-black uppercase font-black mb-1 block">To (b)</label>
+                            <label className="text-[10px] text-white uppercase font-black mb-1 block">To (b)</label>
                             <input
                                 type="text"
                                 value={integralB}
                                 onChange={e => setIntegralB(e.target.value)}
                                 placeholder="π"
-                                className="w-full px-2 py-1.5 bg-white border-2 border-black rounded-none text-sm font-mono font-bold focus:bg-yellow-50 focus:outline-none text-black"
+                                className="w-full px-2 py-1.5 bg-[#111111] border border-white/10 rounded-2xl text-sm font-mono font-bold focus:bg-yellow-50 focus:outline-none text-white"
                             />
                         </div>
                     </div>
 
                     {integralResult !== null && (
-                        <div className="p-2 bg-primary border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <span className="text-[10px] text-black font-black uppercase block mb-1">Result</span>
+                        <div className="p-2 bg-primary border border-white/10 rounded-2xl shadow-xl">
+                            <span className="text-[10px] text-white font-black uppercase block mb-1">Result</span>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-black font-bold font-mono">∫ f(x) dx =</span>
-                                <span className="font-mono font-black text-black">{integralResult.toFixed(6)}</span>
+                                <span className="text-xs text-white font-bold font-mono">∫ f(x) dx =</span>
+                                <span className="font-mono font-black text-white">{integralResult.toFixed(6)}</span>
                             </div>
                         </div>
                     )}
@@ -599,7 +599,7 @@ const StandardGraphing: React.FC = () => {
             {/* Canvas Area */}
             <div
                 ref={containerRef}
-                className="flex-1 relative h-full bg-white overflow-hidden cursor-grab active:cursor-grabbing"
+                className="flex-1 relative h-full bg-[#111111] overflow-hidden cursor-grab active:cursor-grabbing"
             >
                 <canvas
                     ref={canvasRef}
@@ -612,18 +612,18 @@ const StandardGraphing: React.FC = () => {
                 />
 
                 {/* Floating Controls */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 p-3 rounded-none bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-10">
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 p-3 rounded-2xl bg-[#111111] border border-white/10 shadow-xl z-10">
                     <button
                         onClick={() => { zoomRef.current = Math.max(10, zoomRef.current * 0.8); draw(); setTick(t => t + 1); }}
-                        className="p-2 rounded-none hover:bg-primary border-2 border-transparent hover:border-black transition-all active:translate-x-[1px] active:translate-y-[1px]"
+                        className="p-2 rounded-2xl hover:bg-primary border border-transparent hover:border-white/10 transition-all active:translate-x-[1px] active:translate-y-[1px]"
                         title="Zoom Out"
                     >
-                        <ZoomOut size={24} className="text-black" />
+                        <ZoomOut size={24} className="text-white" />
                     </button>
                     <div className="w-[2px] h-8 bg-black" />
                     <button
                         onClick={resetView}
-                        className="size-14 rounded-none bg-primary text-black flex items-center justify-center hover:bg-primary-hover border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all active:scale-95"
+                        className="size-14 rounded-2xl bg-primary text-white flex items-center justify-center hover:bg-primary-hover border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all active:scale-95"
                         title="Reset View"
                     >
                         <RefreshCw size={24} className="font-black" />
@@ -631,24 +631,24 @@ const StandardGraphing: React.FC = () => {
                     <div className="w-[2px] h-8 bg-black" />
                     <button
                         onClick={() => { zoomRef.current = Math.min(200, zoomRef.current * 1.2); draw(); setTick(t => t + 1); }}
-                        className="p-2 rounded-none hover:bg-primary border-2 border-transparent hover:border-black transition-all active:translate-x-[1px] active:translate-y-[1px]"
+                        className="p-2 rounded-2xl hover:bg-primary border border-transparent hover:border-white/10 transition-all active:translate-x-[1px] active:translate-y-[1px]"
                         title="Zoom In"
                     >
-                        <ZoomIn size={24} className="text-black" />
+                        <ZoomIn size={24} className="text-white" />
                     </button>
                 </div>
 
                 {/* View Info */}
-                <div className="absolute top-4 right-4 text-xs font-mono text-black font-black bg-white border-2 border-black p-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                <div className="absolute top-4 right-4 text-xs font-mono text-white font-black bg-[#111111] border border-white/10 p-1 shadow-xl">
                     Zoom: {Math.round(zoomRef.current)}px/unit
                 </div>
 
                 {/* Convolution Control Panel */}
                 {functions.some(f => f.id === 'conv_result') && (
-                    <div className="absolute bottom-32 left-1/2 -translate-x-1/2 w-96 p-4 rounded-none bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3 z-10">
-                        <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-black">
+                    <div className="absolute bottom-32 left-1/2 -translate-x-1/2 w-96 p-4 rounded-2xl bg-[#111111] border border-white/10 shadow-xl flex flex-col gap-3 z-10">
+                        <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-white">
                             <span>Convolución (t)</span>
-                            <span className="font-mono bg-primary px-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">{tracePos?.mathX?.toFixed(2) || "0.00"}</span>
+                            <span className="font-mono bg-primary px-2 border border-white/10 shadow-xl">{tracePos?.mathX?.toFixed(2) || "0.00"}</span>
                         </div>
                         <input
                             type="range"
@@ -663,9 +663,9 @@ const StandardGraphing: React.FC = () => {
                                     return f;
                                 }));
                             }}
-                            className="w-full h-4 bg-white border-2 border-black rounded-none appearance-none cursor-pointer accent-primary"
+                            className="w-full h-4 bg-[#111111] border border-white/10 rounded-2xl appearance-none cursor-pointer accent-primary"
                         />
-                        <div className="text-[10px] text-black font-black text-center mt-1 uppercase">
+                        <div className="text-[10px] text-white font-black text-center mt-1 uppercase">
                             Desliza para mover la función azul (g) sobre la verde (f)
                         </div>
                     </div>
@@ -680,7 +680,7 @@ const StandardGraphing: React.FC = () => {
                                 { id: '2', expression: 'cos(x)', color: COLORS[1], visible: true, showDerivative: false },
                             ]);
                         }}
-                        className="px-4 py-2 bg-white border-2 border-black rounded-none text-xs font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] text-black uppercase transition-all"
+                        className="px-4 py-2 bg-[#111111] border border-white/10 rounded-2xl text-xs font-black shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] text-white uppercase transition-all"
                     >
                         Standard
                     </button>
@@ -692,7 +692,7 @@ const StandardGraphing: React.FC = () => {
                                 { id: 'conv_result', expression: '0', color: '#F59E0B', visible: false, showDerivative: false } // Hidden placeholder to trigger UI
                             ]);
                         }}
-                        className="px-4 py-2 bg-primary border-2 border-black rounded-none text-xs font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] text-black uppercase transition-all"
+                        className="px-4 py-2 bg-primary border border-white/10 rounded-2xl text-xs font-black shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] text-white uppercase transition-all"
                     >
                         Convolución Demo
                     </button>

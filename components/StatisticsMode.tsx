@@ -208,16 +208,16 @@ const StatisticsMode: React.FC = () => {
     ];
 
     return (
-        <div className="flex flex-col h-full bg-white">
+        <div className="flex flex-col h-full bg-[#111111]">
             {/* Tabs */}
-            <div className="flex items-center gap-2 p-3 bg-white border-b-2 border-black">
+            <div className="flex items-center gap-2 p-3 bg-[#111111] border-b-2 border-white/10">
                 {tabs.map(tab => (
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-none text-sm font-medium transition-all border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] ${activeTab === tab.id
-                            ? 'bg-primary text-black'
-                            : 'bg-white text-black'
+                        className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-sm font-medium transition-all border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] ${activeTab === tab.id
+                            ? 'bg-primary text-white'
+                            : 'bg-[#111111] text-white'
                             }`}
                     >
                         <tab.icon size={16} />
@@ -228,34 +228,34 @@ const StatisticsMode: React.FC = () => {
 
             <div className="flex-1 flex overflow-hidden">
                 {/* Input Panel */}
-                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-black">
+                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-white/10">
 
                     {/* Descriptive Tab */}
                     {activeTab === 'descriptive' && (
                         <div className="space-y-6">
                             <div>
-                                <h2 className="text-xl font-bold text-black mb-2">📊 Estadística Descriptiva</h2>
-                                <p className="text-sm text-black">
+                                <h2 className="text-xl font-bold text-white mb-2">📊 Estadística Descriptiva</h2>
+                                <p className="text-sm text-white">
                                     Ingresa datos separados por comas
                                 </p>
                             </div>
 
                             <div>
-                                <label className="text-xs text-black uppercase font-bold block mb-2">
+                                <label className="text-xs text-white uppercase font-bold block mb-2">
                                     Datos
                                 </label>
                                 <textarea
                                     value={dataInput}
                                     onChange={(e) => setDataInput(e.target.value)}
                                     rows={4}
-                                    className="w-full bg-white border-2 border-black rounded-none px-4 py-3 text-black font-mono focus:outline-none focus:border-primary resize-none"
+                                    className="w-full bg-[#111111] border border-white/10 rounded-2xl px-4 py-3 text-white font-mono focus:outline-none focus:border-primary resize-none"
                                     placeholder="1, 2, 3, 4, 5..."
                                 />
                             </div>
 
                             <button
                                 onClick={calculateDescriptive}
-                                className="w-full py-3 bg-primary text-black font-bold rounded-none border-2 border-black transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
+                                className="w-full py-3 bg-primary text-white font-bold rounded-2xl border border-white/10 transition-all shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
                             >
                                 Calcular Estadísticas
                             </button>
@@ -266,15 +266,15 @@ const StatisticsMode: React.FC = () => {
                     {activeTab === 'regression' && (
                         <div className="space-y-6">
                             <div>
-                                <h2 className="text-xl font-bold text-black mb-2">📈 Regresión Lineal</h2>
-                                <p className="text-sm text-black">
+                                <h2 className="text-xl font-bold text-white mb-2">📈 Regresión Lineal</h2>
+                                <p className="text-sm text-white">
                                     y = mx + b
                                 </p>
                             </div>
 
                             <div className="space-y-2">
                                 <div className="flex justify-between items-center">
-                                    <label className="text-xs text-black uppercase font-bold">Puntos (x, y)</label>
+                                    <label className="text-xs text-white uppercase font-bold">Puntos (x, y)</label>
                                     <button
                                         onClick={addRegPoint}
                                         className="text-primary hover:underline text-sm flex items-center gap-1 font-bold"
@@ -285,19 +285,19 @@ const StatisticsMode: React.FC = () => {
 
                                 {regPoints.map((point) => (
                                     <div key={point.id} className="flex items-center gap-2">
-                                        <span className="text-black text-xs font-bold">x:</span>
+                                        <span className="text-white text-xs font-bold">x:</span>
                                         <input
                                             type="number"
                                             value={point.x}
                                             onChange={(e) => updateRegPoint(point.id, 'x', parseFloat(e.target.value) || 0)}
-                                            className="w-20 bg-white border-2 border-black rounded-none px-2 py-1 text-black font-mono"
+                                            className="w-20 bg-[#111111] border border-white/10 rounded-2xl px-2 py-1 text-white font-mono"
                                         />
-                                        <span className="text-black text-xs font-bold">y:</span>
+                                        <span className="text-white text-xs font-bold">y:</span>
                                         <input
                                             type="number"
                                             value={point.y}
                                             onChange={(e) => updateRegPoint(point.id, 'y', parseFloat(e.target.value) || 0)}
-                                            className="w-20 bg-white border-2 border-black rounded-none px-2 py-1 text-black font-mono"
+                                            className="w-20 bg-[#111111] border border-white/10 rounded-2xl px-2 py-1 text-white font-mono"
                                         />
                                         {regPoints.length > 2 && (
                                             <button
@@ -313,7 +313,7 @@ const StatisticsMode: React.FC = () => {
 
                             <button
                                 onClick={calculateRegression}
-                                className="w-full py-3 bg-primary text-black font-bold rounded-none border-2 border-black transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
+                                className="w-full py-3 bg-primary text-white font-bold rounded-2xl border border-white/10 transition-all shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
                             >
                                 Calcular Regresión
                             </button>
@@ -324,45 +324,45 @@ const StatisticsMode: React.FC = () => {
                     {activeTab === 'probability' && (
                         <div className="space-y-6">
                             <div>
-                                <h2 className="text-xl font-bold text-black mb-2">🎲 Distribución Normal</h2>
-                                <p className="text-sm text-black">
+                                <h2 className="text-xl font-bold text-white mb-2">🎲 Distribución Normal</h2>
+                                <p className="text-sm text-white">
                                     P(X ≤ x) para N(μ, σ)
                                 </p>
                             </div>
 
                             <div className="grid grid-cols-3 gap-4">
                                 <div>
-                                    <label className="text-xs text-black uppercase font-bold block mb-1">μ (media)</label>
+                                    <label className="text-xs text-white uppercase font-bold block mb-1">μ (media)</label>
                                     <input
                                         type="number"
                                         value={probMean}
                                         onChange={(e) => setProbMean(e.target.value)}
-                                        className="w-full bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono"
+                                        className="w-full bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono"
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-black uppercase font-bold block mb-1">σ (std)</label>
+                                    <label className="text-xs text-white uppercase font-bold block mb-1">σ (std)</label>
                                     <input
                                         type="number"
                                         value={probStd}
                                         onChange={(e) => setProbStd(e.target.value)}
-                                        className="w-full bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono"
+                                        className="w-full bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono"
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-black uppercase font-bold block mb-1">x</label>
+                                    <label className="text-xs text-white uppercase font-bold block mb-1">x</label>
                                     <input
                                         type="number"
                                         value={probX}
                                         onChange={(e) => setProbX(e.target.value)}
-                                        className="w-full bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono"
+                                        className="w-full bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono"
                                     />
                                 </div>
                             </div>
 
                             <button
                                 onClick={calculateProbability}
-                                className="w-full py-3 bg-primary text-black font-bold rounded-none border-2 border-black transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
+                                className="w-full py-3 bg-primary text-white font-bold rounded-2xl border border-white/10 transition-all shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
                             >
                                 Calcular Probabilidad
                             </button>
@@ -372,8 +372,8 @@ const StatisticsMode: React.FC = () => {
 
                 {/* Results Panel */}
                 <div className="hidden lg:flex w-1/2 p-6 flex-col overflow-y-auto">
-                    <h3 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
-                        <Calculator size={20} className="text-black" />
+                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <Calculator size={20} className="text-white" />
                         Resultados
                     </h3>
 
@@ -394,8 +394,8 @@ const StatisticsMode: React.FC = () => {
                                 ['Q3', descResult.q3?.toFixed(2)],
                                 ['IQR', descResult.iqr?.toFixed(2)],
                             ].map(([label, value]) => (
-                                <div key={label} className="bg-white border-2 border-black rounded-none p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                    <div className="text-xs text-black uppercase font-bold">{label}</div>
+                                <div key={label} className="bg-[#111111] border border-white/10 rounded-2xl p-3 shadow-xl">
+                                    <div className="text-xs text-white uppercase font-bold">{label}</div>
                                     <div className="text-lg font-bold text-primary font-mono">{value}</div>
                                 </div>
                             ))}
@@ -404,25 +404,25 @@ const StatisticsMode: React.FC = () => {
 
                     {activeTab === 'regression' && regResult && (
                         <div className="space-y-4">
-                            <div className="p-6 bg-white border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                <div className="text-2xl font-bold text-black font-mono">
+                            <div className="p-6 bg-[#111111] border border-white/10 rounded-2xl shadow-xl">
+                                <div className="text-2xl font-bold text-white font-mono">
                                     {regResult.equation}
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-2 gap-3">
-                                <div className="bg-white border-2 border-black rounded-none p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                    <div className="text-xs text-black uppercase font-bold">Pendiente (m)</div>
-                                    <div className="text-lg font-bold text-black font-mono">{regResult.slope.toFixed(6)}</div>
+                                <div className="bg-[#111111] border border-white/10 rounded-2xl p-3 shadow-xl">
+                                    <div className="text-xs text-white uppercase font-bold">Pendiente (m)</div>
+                                    <div className="text-lg font-bold text-white font-mono">{regResult.slope.toFixed(6)}</div>
                                 </div>
-                                <div className="bg-white border-2 border-black rounded-none p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                    <div className="text-xs text-black uppercase font-bold">Intercepto (b)</div>
-                                    <div className="text-lg font-bold text-black font-mono">{regResult.intercept.toFixed(6)}</div>
+                                <div className="bg-[#111111] border border-white/10 rounded-2xl p-3 shadow-xl">
+                                    <div className="text-xs text-white uppercase font-bold">Intercepto (b)</div>
+                                    <div className="text-lg font-bold text-white font-mono">{regResult.intercept.toFixed(6)}</div>
                                 </div>
-                                <div className="bg-white border-2 border-black rounded-none p-3 col-span-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                    <div className="text-xs text-black uppercase font-bold">Coeficiente R²</div>
+                                <div className="bg-[#111111] border border-white/10 rounded-2xl p-3 col-span-2 shadow-xl">
+                                    <div className="text-xs text-white uppercase font-bold">Coeficiente R²</div>
                                     <div className="text-xl font-bold text-primary font-mono">{regResult.r2.toFixed(6)}</div>
-                                    <div className="text-xs text-black mt-1 font-bold">
+                                    <div className="text-xs text-white mt-1 font-bold">
                                         {regResult.r2 >= 0.9 ? '✓ Muy buen ajuste' :
                                             regResult.r2 >= 0.7 ? '○ Ajuste aceptable' :
                                                 '✗ Ajuste débil'}
@@ -433,15 +433,15 @@ const StatisticsMode: React.FC = () => {
                     )}
 
                     {activeTab === 'probability' && probResult && (
-                        <div className="p-6 bg-white border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <pre className="text-lg text-black font-mono whitespace-pre-wrap">
+                        <div className="p-6 bg-[#111111] border border-white/10 rounded-2xl shadow-xl">
+                            <pre className="text-lg text-white font-mono whitespace-pre-wrap">
                                 {probResult}
                             </pre>
                         </div>
                     )}
 
                     {!descResult && !regResult && !probResult && (
-                        <div className="flex-1 flex items-center justify-center text-black">
+                        <div className="flex-1 flex items-center justify-center text-white">
                             <div className="text-center">
                                 <BarChart3 size={48} className="mx-auto mb-4 opacity-20" />
                                 <p className="font-bold">Ingresa datos y presiona Calcular</p>

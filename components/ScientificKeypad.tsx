@@ -26,16 +26,16 @@ const ScientificKeypad: React.FC<ScientificKeypadProps> = ({ onKeyClick }) => {
     <button
       onClick={() => onKeyClick(val || (typeof label === 'string' ? label : ''))}
       className={`
-        relative overflow-hidden rounded-none font-black text-lg transition-all select-none
-        flex items-center justify-center border-2 border-black
+        relative overflow-hidden rounded-2xl font-black text-lg transition-all select-none
+        flex items-center justify-center border border-white/10
         ${wide ? 'col-span-2' : 'col-span-1'}
         ${primary
-          ? 'bg-primary hover:bg-primary-hover text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+          ? 'bg-primary hover:bg-primary-hover text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
           : secondary
-            ? 'bg-accent-yellow text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+            ? 'bg-white/10 text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
             : action
-              ? 'bg-secondary text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
-              : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+              ? 'bg-secondary text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+              : 'bg-[#111111] text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
         }
         h-12 lg:h-14
       `}
@@ -53,9 +53,9 @@ const ScientificKeypad: React.FC<ScientificKeypadProps> = ({ onKeyClick }) => {
           e.stopPropagation();
           setOpenDropdown(openDropdown === id ? null : id);
         }}
-        className="w-full h-12 lg:h-14 rounded-none font-black text-lg transition-all select-none
-          flex items-center justify-center gap-1 border-2 border-black
-          bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
+        className="w-full h-12 lg:h-14 rounded-2xl font-black text-lg transition-all select-none
+          flex items-center justify-center gap-1 border border-white/10
+          bg-[#111111] text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
       >
         {label}
         <ChevronDown size={14} />
@@ -63,7 +63,7 @@ const ScientificKeypad: React.FC<ScientificKeypadProps> = ({ onKeyClick }) => {
 
       {/* Dropdown Menu */}
       {openDropdown === id && (
-        <div className="absolute top-full left-0 mt-1 z-50 bg-white border-4 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] min-w-[140px] overflow-hidden">
+        <div className="absolute top-full left-0 mt-1 z-50 bg-[#111111] border border-white/10 rounded-2xl shadow-xl min-w-[140px] overflow-hidden">
           {options.map((opt) => (
             <button
               key={opt.val}
@@ -72,7 +72,7 @@ const ScientificKeypad: React.FC<ScientificKeypadProps> = ({ onKeyClick }) => {
                 onKeyClick(opt.val);
                 setOpenDropdown(null);
               }}
-              className="w-full px-4 py-2 text-left hover:bg-primary text-black hover:text-white transition-colors font-black border-b-2 border-black last:border-0"
+              className="w-full px-4 py-2 text-left hover:bg-primary text-white hover:text-white transition-colors font-black border-b-2 border-white/10 last:border-0"
             >
               {opt.label}
             </button>
@@ -247,16 +247,16 @@ const ScientificKeypad: React.FC<ScientificKeypadProps> = ({ onKeyClick }) => {
   );
 
   return (
-    <div className="flex flex-col h-full max-h-screen bg-white border-l-2 border-black overflow-hidden">
+    <div className="flex flex-col h-full max-h-screen bg-[#111111] border-l-2 border-white/10 overflow-hidden">
       {/* Tabs */}
-      <div className="flex p-2 gap-2 border-b-2 border-black bg-white">
+      <div className="flex p-2 gap-2 border-b-2 border-white/10 bg-[#111111]">
         {(['MAIN', 'ABC', 'GREEK', 'FUNC', 'CONST'] as TabType[]).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 py-2 text-xs font-black rounded-none border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] transition-all ${activeTab === tab
+            className={`flex-1 py-2 text-xs font-black rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] transition-all ${activeTab === tab
               ? 'bg-primary text-white'
-              : 'bg-white text-black'
+              : 'bg-[#111111] text-white'
               }`}
           >
             {tab === 'GREEK' ? 'αβγ' : tab}
@@ -265,7 +265,7 @@ const ScientificKeypad: React.FC<ScientificKeypadProps> = ({ onKeyClick }) => {
       </div>
 
       {/* Keypad Grid */}
-      <div className="flex-1 p-4 overflow-y-auto custom-scrollbar bg-white">
+      <div className="flex-1 p-4 overflow-y-auto custom-scrollbar bg-[#111111]">
         {activeTab === 'MAIN' && renderMainTab()}
         {activeTab === 'ABC' && renderAbcTab()}
         {activeTab === 'GREEK' && renderGreekTab()}

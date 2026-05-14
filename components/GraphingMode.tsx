@@ -19,13 +19,13 @@ const GraphingMode: React.FC = () => {
   return (
     <div className="h-full flex flex-col bg-background">
       {/* Mode Toggle */}
-      <div className="flex items-center gap-3 p-4 border-b-4 border-black shrink-0">
-        <span className="text-[10px] text-black font-black uppercase tracking-widest mr-2">Modo:</span>
+      <div className="flex items-center gap-3 p-4 border-b-4 border-white/10 shrink-0">
+        <span className="text-[10px] text-white font-black uppercase tracking-widest mr-2">Modo:</span>
         <button
           onClick={() => setMode('standard')}
-          className={`flex items-center gap-2 px-6 py-2 border-2 border-black text-sm font-black transition-all ${mode === 'standard'
-            ? 'bg-accent-yellow shadow-none translate-x-[1px] translate-y-[1px]'
-            : 'bg-white hover:bg-gray-100 text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+          className={`flex items-center gap-2 px-6 py-2 border border-white/10 text-sm font-black transition-all ${mode === 'standard'
+            ? 'bg-white/10 shadow-none translate-x-[1px] translate-y-[1px]'
+            : 'bg-[#111111] hover:bg-gray-100 text-white shadow-xl'
             }`}
         >
           <LineChart size={16} strokeWidth={3} />
@@ -33,9 +33,9 @@ const GraphingMode: React.FC = () => {
         </button>
         <button
           onClick={() => setMode('epicycles')}
-          className={`flex items-center gap-2 px-6 py-2 border-2 border-black text-sm font-black transition-all ${mode === 'epicycles'
-            ? 'bg-accent-pink text-white shadow-none translate-x-[1px] translate-y-[1px]'
-            : 'bg-white hover:bg-gray-100 text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+          className={`flex items-center gap-2 px-6 py-2 border border-white/10 text-sm font-black transition-all ${mode === 'epicycles'
+            ? 'bg-white/5 text-white shadow-none translate-x-[1px] translate-y-[1px]'
+            : 'bg-[#111111] hover:bg-gray-100 text-white shadow-xl'
             }`}
         >
           <Sparkles size={16} strokeWidth={3} />

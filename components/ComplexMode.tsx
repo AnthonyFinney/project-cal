@@ -204,24 +204,24 @@ const ComplexMode: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-full bg-white">
+        <div className="flex flex-col h-full bg-[#111111]">
             {/* Header */}
-            <div className="flex items-center gap-2 p-3 bg-white border-b-2 border-black">
-                <span className="text-xs text-black uppercase tracking-wider mr-2">Entrada:</span>
+            <div className="flex items-center gap-2 p-3 bg-[#111111] border-b-2 border-white/10">
+                <span className="text-xs text-white uppercase tracking-wider mr-2">Entrada:</span>
                 <button
                     onClick={() => setInputMode('rectangular')}
-                    className={`px-4 py-2 rounded-none text-sm font-black transition-all border-2 border-black ${inputMode === 'rectangular'
-                        ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                        : 'bg-white hover:bg-gray-100 text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                    className={`px-4 py-2 rounded-2xl text-sm font-black transition-all border border-white/10 ${inputMode === 'rectangular'
+                        ? 'bg-primary text-white shadow-xl'
+                        : 'bg-[#111111] hover:bg-gray-100 text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                         }`}
                 >
                     Rectangular (a + bi)
                 </button>
                 <button
                     onClick={() => setInputMode('polar')}
-                    className={`px-4 py-2 rounded-none text-sm font-black transition-all border-2 border-black ${inputMode === 'polar'
-                        ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                        : 'bg-white hover:bg-gray-100 text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                    className={`px-4 py-2 rounded-2xl text-sm font-black transition-all border border-white/10 ${inputMode === 'polar'
+                        ? 'bg-primary text-white shadow-xl'
+                        : 'bg-[#111111] hover:bg-gray-100 text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                         }`}
                 >
                     Polar (r∠θ)
@@ -230,12 +230,12 @@ const ComplexMode: React.FC = () => {
 
             <div className="flex-1 flex overflow-hidden">
                 {/* Input Panel */}
-                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-black">
-                    <h2 className="text-xl font-black text-black mb-4">🔮 Números Complejos</h2>
+                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-white/10">
+                    <h2 className="text-xl font-black text-white mb-4">🔮 Números Complejos</h2>
 
                     {/* Z1 Input */}
                     <div className="mb-4">
-                        <label className="text-xs text-black uppercase font-black block mb-2">
+                        <label className="text-xs text-white uppercase font-black block mb-2">
                             z₁
                         </label>
                         {inputMode === 'rectangular' ? (
@@ -244,15 +244,15 @@ const ComplexMode: React.FC = () => {
                                     type="number"
                                     value={z1Re}
                                     onChange={(e) => setZ1Re(e.target.value)}
-                                    className="w-24 bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                                    className="w-24 bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono shadow-xl"
                                     placeholder="Re"
                                 />
-                                <span className="text-black">+</span>
+                                <span className="text-white">+</span>
                                 <input
                                     type="number"
                                     value={z1Im}
                                     onChange={(e) => setZ1Im(e.target.value)}
-                                    className="w-24 bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                                    className="w-24 bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono shadow-xl"
                                     placeholder="Im"
                                 />
                                 <span className="text-primary font-black text-xl">i</span>
@@ -263,7 +263,7 @@ const ComplexMode: React.FC = () => {
                                     type="number"
                                     value={z1R}
                                     onChange={(e) => setZ1R(e.target.value)}
-                                    className="w-24 bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                                    className="w-24 bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono shadow-xl"
                                     placeholder="r"
                                 />
                                 <span className="text-primary font-black text-xl">∠</span>
@@ -271,10 +271,10 @@ const ComplexMode: React.FC = () => {
                                     type="number"
                                     value={z1Theta}
                                     onChange={(e) => setZ1Theta(e.target.value)}
-                                    className="w-24 bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                                    className="w-24 bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono shadow-xl"
                                     placeholder="θ"
                                 />
-                                <span className="text-black">°</span>
+                                <span className="text-white">°</span>
                             </div>
                         )}
                     </div>
@@ -285,9 +285,9 @@ const ComplexMode: React.FC = () => {
                             <button
                                 key={op}
                                 onClick={() => setOperation(op)}
-                                className={`w-12 h-12 rounded-none text-xl font-black transition-all border-2 border-black ${operation === op
-                                    ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                                    : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                                className={`w-12 h-12 rounded-2xl text-xl font-black transition-all border border-white/10 ${operation === op
+                                    ? 'bg-primary text-white shadow-xl'
+                                    : 'bg-[#111111] text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                                     }`}
                             >
                                 {op === '*' ? '×' : op === '/' ? '÷' : op}
@@ -297,7 +297,7 @@ const ComplexMode: React.FC = () => {
 
                     {/* Z2 Input */}
                     <div className="mb-6">
-                        <label className="text-xs text-black uppercase font-black block mb-2">
+                        <label className="text-xs text-white uppercase font-black block mb-2">
                             z₂
                         </label>
                         <div className="flex items-center gap-2">
@@ -305,15 +305,15 @@ const ComplexMode: React.FC = () => {
                                 type="number"
                                 value={z2Re}
                                 onChange={(e) => setZ2Re(e.target.value)}
-                                className="w-24 bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                                className="w-24 bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono shadow-xl"
                                 placeholder="Re"
                             />
-                            <span className="text-black">+</span>
+                            <span className="text-white">+</span>
                             <input
                                 type="number"
                                 value={z2Im}
                                 onChange={(e) => setZ2Im(e.target.value)}
-                                className="w-24 bg-white border-2 border-black rounded-none px-3 py-2 text-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                                className="w-24 bg-[#111111] border border-white/10 rounded-2xl px-3 py-2 text-white font-mono shadow-xl"
                                 placeholder="Im"
                             />
                             <span className="text-primary font-black text-xl">i</span>
@@ -322,7 +322,7 @@ const ComplexMode: React.FC = () => {
 
                     <button
                         onClick={calculate}
-                        className="w-full py-3 bg-primary text-white font-black rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
+                        className="w-full py-3 bg-primary text-white font-black rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
                     >
                         <Calculator size={18} />
                         Calcular
@@ -334,13 +334,13 @@ const ComplexMode: React.FC = () => {
                     {/* Result Display */}
                     {result && (
                         <>
-                            <div className="p-4 bg-white border-4 border-black rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                                <div className="text-xs text-black uppercase mb-1 font-black">Resultado</div>
+                            <div className="p-4 bg-[#111111] border border-white/10 rounded-2xl shadow-xl">
+                                <div className="text-xs text-white uppercase mb-1 font-black">Resultado</div>
                                 <div className="text-2xl font-black text-primary font-mono">
                                     {formatComplex(result)}
                                 </div>
                                 {resultPolar && (
-                                    <div className="text-sm text-black/60 mt-2 font-mono">
+                                    <div className="text-sm text-white/60 mt-2 font-mono">
                                         = {resultPolar.r.toFixed(4)} ∠ {resultPolar.thetaDeg.toFixed(2)}°
                                     </div>
                                 )}
@@ -349,16 +349,16 @@ const ComplexMode: React.FC = () => {
                             {/* Conversions */}
                             <div className="grid grid-cols-2 gap-3">
                                 {z1Polar && (
-                                    <div className="bg-white border-2 border-black rounded-none p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                        <div className="text-xs text-black/60 uppercase font-black">z₁ polar</div>
+                                    <div className="bg-[#111111] border border-white/10 rounded-2xl p-3 shadow-xl">
+                                        <div className="text-xs text-white/60 uppercase font-black">z₁ polar</div>
                                         <div className="text-sm font-mono text-green-700 font-bold">
                                             {z1Polar.r.toFixed(2)} ∠ {z1Polar.thetaDeg.toFixed(2)}°
                                         </div>
                                     </div>
                                 )}
                                 {z2Polar && (
-                                    <div className="bg-white border-2 border-black rounded-none p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                        <div className="text-xs text-black/60 uppercase font-black">z₂ polar</div>
+                                    <div className="bg-[#111111] border border-white/10 rounded-2xl p-3 shadow-xl">
+                                        <div className="text-xs text-white/60 uppercase font-black">z₂ polar</div>
                                         <div className="text-sm font-mono text-blue-700 font-bold">
                                             {z2Polar.r.toFixed(2)} ∠ {z2Polar.thetaDeg.toFixed(2)}°
                                         </div>
@@ -369,10 +369,10 @@ const ComplexMode: React.FC = () => {
                     )}
 
                     {/* Argand Diagram */}
-                    <div className="flex-1 bg-white border-2 border-black rounded-none overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                        <div className="p-2 border-b-2 border-black flex items-center gap-2">
-                            <Eye size={14} className="text-black" />
-                            <span className="text-xs text-black uppercase font-black">Diagrama de Argand</span>
+                    <div className="flex-1 bg-[#111111] border border-white/10 rounded-2xl overflow-hidden shadow-xl">
+                        <div className="p-2 border-b-2 border-white/10 flex items-center gap-2">
+                            <Eye size={14} className="text-white" />
+                            <span className="text-xs text-white uppercase font-black">Diagrama de Argand</span>
                         </div>
                         <canvas
                             ref={canvasRef}

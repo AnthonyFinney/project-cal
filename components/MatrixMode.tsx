@@ -113,34 +113,34 @@ const MatrixMode: React.FC = () => {
         matrix: MatrixState;
         matrixKey: 'A' | 'B'
     }) => (
-        <div className="bg-white rounded-none border-2 border-black overflow-hidden flex flex-col shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            <div className="px-4 py-3 border-b-2 border-black bg-white flex justify-between items-center">
+        <div className="bg-[#111111] rounded-2xl border border-white/10 overflow-hidden flex flex-col shadow-xl">
+            <div className="px-4 py-3 border-b-2 border-white/10 bg-[#111111] flex justify-between items-center">
                 <div className="flex items-center gap-3">
-                    <div className={`size-8 rounded-none border-2 border-black ${matrixKey === 'A' ? 'bg-primary text-white' : 'bg-white text-black'} flex items-center justify-center font-black font-mono shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]`}>
+                    <div className={`size-8 rounded-2xl border border-white/10 ${matrixKey === 'A' ? 'bg-primary text-white' : 'bg-[#111111] text-white'} flex items-center justify-center font-black font-mono shadow-xl`}>
                         {label}
                     </div>
-                    <span className="font-black text-black">Matrix {label}</span>
+                    <span className="font-black text-white">Matrix {label}</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => resizeMatrix(matrixKey, Math.max(1, matrix.rows - 1), matrix.cols)}
-                        className="p-1 hover:bg-gray-100 border-2 border-black text-black transition-all"
+                        className="p-1 hover:bg-gray-100 border border-white/10 text-white transition-all"
                         title="Remove row"
                     >
                         <Minus size={14} />
                     </button>
-                    <span className="text-xs text-black font-black font-mono">{matrix.rows} × {matrix.cols}</span>
+                    <span className="text-xs text-white font-black font-mono">{matrix.rows} × {matrix.cols}</span>
                     <button
                         onClick={() => resizeMatrix(matrixKey, matrix.rows + 1, matrix.cols)}
-                        className="p-1 hover:bg-gray-100 border-2 border-black text-black transition-all"
+                        className="p-1 hover:bg-gray-100 border border-white/10 text-white transition-all"
                         title="Add row"
                     >
                         <Plus size={14} />
                     </button>
                 </div>
             </div>
-            <div className="p-6 flex items-center justify-center bg-white min-h-[200px]">
-                <div className="flex relative before:absolute before:inset-y-0 before:-left-3 before:w-3 before:border-2 before:border-r-0 before:border-black before:rounded-none after:absolute after:inset-y-0 after:-right-3 after:w-3 after:border-2 after:border-l-0 after:border-black after:rounded-none">
+            <div className="p-6 flex items-center justify-center bg-[#111111] min-h-[200px]">
+                <div className="flex relative before:absolute before:inset-y-0 before:-left-3 before:w-3 before:border before:border-r-0 before:border-white/10 before:rounded-2xl after:absolute after:inset-y-0 after:-right-3 after:w-3 after:border after:border-l-0 after:border-white/10 after:rounded-2xl">
                     <div
                         className="grid gap-2"
                         style={{ gridTemplateColumns: `repeat(${matrix.cols}, minmax(0, 1fr))` }}
@@ -152,23 +152,23 @@ const MatrixMode: React.FC = () => {
                                     type="text"
                                     value={val}
                                     onChange={(e) => updateMatrixValue(matrixKey, r, c, e.target.value)}
-                                    className="w-14 h-12 bg-white border-2 border-black rounded-none text-center text-black font-mono focus:bg-gray-50 focus:outline-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+                                    className="w-14 h-12 bg-[#111111] border border-white/10 rounded-2xl text-center text-white font-mono focus:bg-gray-50 focus:outline-none shadow-xl transition-all"
                                 />
                             ))
                         )}
                     </div>
                 </div>
             </div>
-            <div className="px-4 py-2 border-t-2 border-black bg-white flex justify-end gap-2">
+            <div className="px-4 py-2 border-t-2 border-white/10 bg-[#111111] flex justify-end gap-2">
                 <button
                     onClick={() => resizeMatrix(matrixKey, matrix.rows, Math.max(1, matrix.cols - 1))}
-                    className="text-xs text-black font-black hover:underline"
+                    className="text-xs text-white font-black hover:underline"
                 >
                     - Col
                 </button>
                 <button
                     onClick={() => resizeMatrix(matrixKey, matrix.rows, matrix.cols + 1)}
-                    className="text-xs text-black font-black hover:underline"
+                    className="text-xs text-white font-black hover:underline"
                 >
                     + Col
                 </button>
@@ -177,12 +177,12 @@ const MatrixMode: React.FC = () => {
     );
 
     return (
-        <div className="flex flex-col h-full bg-white p-6 lg:p-10 overflow-y-auto">
+        <div className="flex flex-col h-full bg-[#111111] p-6 lg:p-10 overflow-y-auto">
             <div className="max-w-6xl mx-auto w-full flex flex-col gap-6">
-                <header className="flex justify-between items-center border-b-2 border-black pb-4">
+                <header className="flex justify-between items-center border-b-2 border-white/10 pb-4">
                     <div>
-                        <h2 className="text-2xl font-black text-black tracking-tight">Matrix Operations</h2>
-                        <p className="text-black/60 mt-1 font-bold">Linear Algebra Workspace</p>
+                        <h2 className="text-2xl font-black text-white tracking-tight">Matrix Operations</h2>
+                        <p className="text-white/60 mt-1 font-bold">Linear Algebra Workspace</p>
                     </div>
                     <div className="flex gap-3">
                         <button
@@ -190,7 +190,7 @@ const MatrixMode: React.FC = () => {
                                 setMatrixA({ rows: 3, cols: 3, values: createEmptyMatrix(3, 3) });
                                 setMatrixB({ rows: 3, cols: 1, values: createEmptyMatrix(3, 1) });
                             }}
-                            className="px-4 py-2 bg-white border-2 border-black rounded-none hover:bg-gray-100 text-black text-sm font-black flex items-center gap-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] transition-all"
+                            className="px-4 py-2 bg-[#111111] border border-white/10 rounded-2xl hover:bg-gray-100 text-white text-sm font-black flex items-center gap-2 shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] transition-all"
                         >
                             <RotateCcw size={16} />
                             Reset
@@ -205,13 +205,13 @@ const MatrixMode: React.FC = () => {
 
                 {/* Operations Toolbar */}
                 <div className="flex justify-center">
-                    <div className="bg-white border-2 border-black rounded-none p-2 flex gap-2 flex-wrap justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div className="bg-[#111111] border border-white/10 rounded-2xl p-2 flex gap-2 flex-wrap justify-center shadow-xl">
                         {['det(A)', 'inv(A)', 'transpose(A)', 'eigenvals(A)', 'A × B', 'rref(A)'].map(op => (
                             <button
                                 key={op}
                                 onClick={() => executeOperation(op)}
                                 disabled={loading}
-                                className="px-4 py-2 rounded-none bg-white border-2 border-black hover:bg-primary hover:text-white text-black text-sm font-black transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] disabled:opacity-50"
+                                className="px-4 py-2 rounded-2xl bg-[#111111] border border-white/10 hover:bg-primary hover:text-white text-white text-sm font-black transition-all shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] disabled:opacity-50"
                             >
                                 {op}
                             </button>
@@ -220,20 +220,20 @@ const MatrixMode: React.FC = () => {
                 </div>
 
                 {/* Results Console */}
-                <div className="bg-white rounded-none border-2 border-black overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                    <div className="px-4 py-2 border-b-2 border-black bg-white flex justify-between">
-                        <span className="text-xs font-black text-black uppercase tracking-wider">Console Output</span>
+                <div className="bg-[#111111] rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+                    <div className="px-4 py-2 border-b-2 border-white/10 bg-[#111111] flex justify-between">
+                        <span className="text-xs font-black text-white uppercase tracking-wider">Console Output</span>
                         <button onClick={clearResults} className="text-xs text-primary font-black cursor-pointer hover:underline">
                             Clear
                         </button>
                     </div>
                     <div className="p-4 font-mono text-sm space-y-3 h-48 overflow-y-auto">
                         {results.length === 0 ? (
-                            <p className="text-black/40 text-center py-8 font-bold">Click an operation to see results...</p>
+                            <p className="text-white/40 text-center py-8 font-bold">Click an operation to see results...</p>
                         ) : (
                             results.map((r, i) => (
-                                <div key={i} className="border-b border-black/10 pb-2">
-                                    <div className="flex gap-2 text-black/50">
+                                <div key={i} className="border-b border-white/10/10 pb-2">
+                                    <div className="flex gap-2 text-white/50">
                                         <span className="text-primary font-black">&gt;</span>
                                         <span className="font-bold">{r.command}</span>
                                     </div>

@@ -9,7 +9,7 @@ interface PlateletsGraphProps {
 const PlateletsGraph: React.FC<PlateletsGraphProps> = ({ data, loading }) => {
     if (loading) {
         return (
-            <div className="w-full h-80 flex items-center justify-center bg-white border-2 border-black rounded-none animate-pulse">
+            <div className="w-full h-80 flex items-center justify-center bg-[#111111] border border-white/10 rounded-2xl animate-pulse">
                 <span className="text-gray-600 font-bold">Procesando simulación en EquaCore C++...</span>
             </div>
         );

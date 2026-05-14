@@ -95,7 +95,7 @@ const MathDisplay: React.FC<MathDisplayProps> = ({ expression, isResult = false,
     <Tag 
       ref={containerRef as any} 
       className={`
-        ${isResult ? 'text-primary text-xl font-bold' : 'text-black text-lg'} 
+        ${isResult ? 'text-primary text-xl font-bold' : 'text-white text-lg'} 
         ${inline ? '' : 'overflow-x-auto overflow-y-hidden'}
         ${className}
       `} 

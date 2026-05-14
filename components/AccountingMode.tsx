@@ -142,31 +142,31 @@ const AccountingMode: React.FC = () => {
         suffix?: string;
     }) => (
         <div className="space-y-1">
-            <label className="text-xs text-black uppercase font-black">{label}</label>
-            <div className="flex items-center bg-white border-2 border-black rounded-none px-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                {prefix && <span className="text-black/60 mr-1">{prefix}</span>}
+            <label className="text-xs text-white uppercase font-black">{label}</label>
+            <div className="flex items-center bg-[#111111] border border-white/10 rounded-2xl px-3 shadow-xl">
+                {prefix && <span className="text-white/60 mr-1">{prefix}</span>}
                 <input
                     type="number"
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
-                    className="bg-transparent text-black text-lg font-mono w-full py-2 focus:outline-none"
+                    className="bg-transparent text-white text-lg font-mono w-full py-2 focus:outline-none"
                 />
-                {suffix && <span className="text-black/60 ml-1">{suffix}</span>}
+                {suffix && <span className="text-white/60 ml-1">{suffix}</span>}
             </div>
         </div>
     );
 
     return (
-        <div className="flex flex-col h-full bg-white">
+        <div className="flex flex-col h-full bg-[#111111]">
             {/* Tabs */}
-            <div className="flex items-center gap-1 p-3 bg-white border-b-2 border-black overflow-x-auto">
+            <div className="flex items-center gap-1 p-3 bg-[#111111] border-b-2 border-white/10 overflow-x-auto">
                 {tabs.map(tab => (
                     <button
                         key={tab.id}
                         onClick={() => { setActiveTab(tab.id); setResult(null); }}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-none text-sm font-black transition-all whitespace-nowrap border-2 border-black ${activeTab === tab.id
-                                ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                                : 'bg-white hover:bg-gray-100 text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                        className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-sm font-black transition-all whitespace-nowrap border border-white/10 ${activeTab === tab.id
+                                ? 'bg-primary text-white shadow-xl'
+                                : 'bg-[#111111] hover:bg-gray-100 text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                             }`}
                     >
                         <tab.icon size={16} />
@@ -177,14 +177,14 @@ const AccountingMode: React.FC = () => {
 
             <div className="flex-1 flex overflow-hidden">
                 {/* Calculator Panel */}
-                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-black">
+                <div className="w-full lg:w-1/2 p-6 overflow-y-auto border-r-2 border-white/10">
 
                     {/* VAN Tab */}
                     {activeTab === 'van' && (
                         <div className="space-y-6">
                             <div>
-                                <h2 className="text-xl font-black text-black mb-2">Valor Actual Neto (VAN)</h2>
-                                <p className="text-sm text-black/60">
+                                <h2 className="text-xl font-black text-white mb-2">Valor Actual Neto (VAN)</h2>
+                                <p className="text-sm text-white/60">
                                     VAN = Σ(Ft / (1 + r)^t) para t = 0 hasta n
                                 </p>
                             </div>
@@ -198,10 +198,10 @@ const AccountingMode: React.FC = () => {
 
                             <div className="space-y-2">
                                 <div className="flex justify-between items-center">
-                                    <label className="text-xs text-black uppercase font-black">Flujos de Caja</label>
+                                    <label className="text-xs text-white uppercase font-black">Flujos de Caja</label>
                                     <button
                                         onClick={addCashFlow}
-                                        className="text-primary hover:text-black font-black text-sm flex items-center gap-1"
+                                        className="text-primary hover:text-white font-black text-sm flex items-center gap-1"
                                     >
                                         <Plus size={14} /> Añadir
                                     </button>
@@ -209,20 +209,20 @@ const AccountingMode: React.FC = () => {
 
                                 {vanFlows.map((flow, idx) => (
                                     <div key={flow.id} className="flex items-center gap-2">
-                                        <span className="text-black/60 text-xs w-8">t={flow.period}</span>
-                                        <div className="flex-1 flex items-center bg-white border-2 border-black rounded-none px-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                                            <span className="text-black/60 mr-1">$</span>
+                                        <span className="text-white/60 text-xs w-8">t={flow.period}</span>
+                                        <div className="flex-1 flex items-center bg-[#111111] border border-white/10 rounded-2xl px-3 shadow-xl">
+                                            <span className="text-white/60 mr-1">$</span>
                                             <input
                                                 type="number"
                                                 value={flow.value}
                                                 onChange={(e) => updateCashFlow(flow.id, parseFloat(e.target.value) || 0)}
-                                                className="bg-transparent text-black font-mono w-full py-2 focus:outline-none"
+                                                className="bg-transparent text-white font-mono w-full py-2 focus:outline-none"
                                             />
                                         </div>
                                         {idx > 0 && (
                                             <button
                                                 onClick={() => removeCashFlow(flow.id)}
-                                                className="text-red-600 hover:text-red-500 p-1 border-2 border-black bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
+                                                className="text-red-600 hover:text-red-500 p-1 border border-white/10 bg-[#111111] shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
                                             >
                                                 <Trash2 size={14} />
                                             </button>
@@ -233,7 +233,7 @@ const AccountingMode: React.FC = () => {
 
                             <button
                                 onClick={calculateVAN}
-                                className="w-full py-3 bg-primary text-white font-black rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                                className="w-full py-3 bg-primary text-white font-black rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                             >
                                 Calcular VAN
                             </button>
@@ -244,24 +244,24 @@ const AccountingMode: React.FC = () => {
                     {activeTab === 'tir' && (
                         <div className="space-y-6">
                             <div>
-                                <h2 className="text-xl font-black text-black mb-2">Tasa Interna de Retorno (TIR)</h2>
-                                <p className="text-sm text-black/60">
+                                <h2 className="text-xl font-black text-white mb-2">Tasa Interna de Retorno (TIR)</h2>
+                                <p className="text-sm text-white/60">
                                     Encuentra r donde VAN = 0 (método Newton-Raphson)
                                 </p>
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs text-black uppercase font-black">Flujos de Caja</label>
+                                <label className="text-xs text-white uppercase font-black">Flujos de Caja</label>
                                 {vanFlows.map((flow, idx) => (
                                     <div key={flow.id} className="flex items-center gap-2">
-                                        <span className="text-black/60 text-xs w-8">t={flow.period}</span>
-                                        <div className="flex-1 flex items-center bg-white border-2 border-black rounded-none px-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                                            <span className="text-black/60 mr-1">$</span>
+                                        <span className="text-white/60 text-xs w-8">t={flow.period}</span>
+                                        <div className="flex-1 flex items-center bg-[#111111] border border-white/10 rounded-2xl px-3 shadow-xl">
+                                            <span className="text-white/60 mr-1">$</span>
                                             <input
                                                 type="number"
                                                 value={flow.value}
                                                 onChange={(e) => updateCashFlow(flow.id, parseFloat(e.target.value) || 0)}
-                                                className="bg-transparent text-black font-mono w-full py-2 focus:outline-none"
+                                                className="bg-transparent text-white font-mono w-full py-2 focus:outline-none"
                                             />
                                         </div>
                                     </div>
@@ -270,7 +270,7 @@ const AccountingMode: React.FC = () => {
 
                             <button
                                 onClick={calculateTIR}
-                                className="w-full py-3 bg-primary text-white font-black rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                                className="w-full py-3 bg-primary text-white font-black rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                             >
                                 Calcular TIR
                             </button>
@@ -281,8 +281,8 @@ const AccountingMode: React.FC = () => {
                     {activeTab === 'depreciation' && (
                         <div className="space-y-6">
                             <div>
-                                <h2 className="text-xl font-black text-black mb-2">Depreciación (Línea Recta)</h2>
-                                <p className="text-sm text-black/60">
+                                <h2 className="text-xl font-black text-white mb-2">Depreciación (Línea Recta)</h2>
+                                <p className="text-sm text-white/60">
                                     D = (Costo - Valor Residual) / Vida Útil
                                 </p>
                             </div>
@@ -293,7 +293,7 @@ const AccountingMode: React.FC = () => {
 
                             <button
                                 onClick={calculateDepreciation}
-                                className="w-full py-3 bg-primary text-white font-black rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                                className="w-full py-3 bg-primary text-white font-black rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                             >
                                 Calcular Depreciación
                             </button>
@@ -304,24 +304,24 @@ const AccountingMode: React.FC = () => {
                     {activeTab === 'interest' && (
                         <div className="space-y-6">
                             <div>
-                                <h2 className="text-xl font-black text-black mb-2">Calculadora de Interés</h2>
+                                <h2 className="text-xl font-black text-white mb-2">Calculadora de Interés</h2>
                             </div>
 
                             <div className="grid grid-cols-2 gap-2">
                                 <button
                                     onClick={() => setIntType('simple')}
-                                    className={`py-2 rounded-none font-black text-sm transition-all border-2 border-black ${intType === 'simple'
-                                            ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                                            : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                                    className={`py-2 rounded-2xl font-black text-sm transition-all border border-white/10 ${intType === 'simple'
+                                            ? 'bg-primary text-white shadow-xl'
+                                            : 'bg-[#111111] text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                                         }`}
                                 >
                                     Simple
                                 </button>
                                 <button
                                     onClick={() => setIntType('compound')}
-                                    className={`py-2 rounded-none font-black text-sm transition-all border-2 border-black ${intType === 'compound'
-                                            ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                                            : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                                    className={`py-2 rounded-2xl font-black text-sm transition-all border border-white/10 ${intType === 'compound'
+                                            ? 'bg-primary text-white shadow-xl'
+                                            : 'bg-[#111111] text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                                         }`}
                                 >
                                     Compuesto
@@ -338,7 +338,7 @@ const AccountingMode: React.FC = () => {
 
                             <button
                                 onClick={calculateInterest}
-                                className="w-full py-3 bg-primary text-white font-black rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                                className="w-full py-3 bg-primary text-white font-black rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                             >
                                 Calcular {intType === 'simple' ? 'Interés Simple' : 'Interés Compuesto'}
                             </button>
@@ -349,7 +349,7 @@ const AccountingMode: React.FC = () => {
                     {activeTab === 'ratios' && (
                         <div className="space-y-6">
                             <div>
-                                <h2 className="text-xl font-black text-black mb-2">Ratios Financieros</h2>
+                                <h2 className="text-xl font-black text-white mb-2">Ratios Financieros</h2>
                             </div>
 
                             <div className="grid grid-cols-3 gap-2">
@@ -357,9 +357,9 @@ const AccountingMode: React.FC = () => {
                                     <button
                                         key={type}
                                         onClick={() => setRatioType(type)}
-                                        className={`py-2 rounded-none font-black text-xs transition-all capitalize border-2 border-black ${ratioType === type
-                                                ? 'bg-primary text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                                                : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                                        className={`py-2 rounded-2xl font-black text-xs transition-all capitalize border border-white/10 ${ratioType === type
+                                                ? 'bg-primary text-white shadow-xl'
+                                                : 'bg-[#111111] text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                                             }`}
                                     >
                                         {type}
@@ -382,7 +382,7 @@ const AccountingMode: React.FC = () => {
 
                             <button
                                 onClick={calculateRatio}
-                                className="w-full py-3 bg-primary text-white font-black rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                                className="w-full py-3 bg-primary text-white font-black rounded-2xl border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                             >
                                 Calcular Ratio
                             </button>
@@ -392,7 +392,7 @@ const AccountingMode: React.FC = () => {
 
                 {/* Results Panel */}
                 <div className="hidden lg:flex w-1/2 p-6 flex-col">
-                    <h3 className="text-lg font-black text-black mb-4 flex items-center gap-2">
+                    <h3 className="text-lg font-black text-white mb-4 flex items-center gap-2">
                         <Calculator size={20} className="text-primary" />
                         Resultado
                     </h3>
@@ -400,7 +400,7 @@ const AccountingMode: React.FC = () => {
                     {result ? (
                         <div className="flex-1 flex flex-col gap-4">
                             {/* Big Result */}
-                            <div className="p-6 bg-white border-4 border-black rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                            <div className="p-6 bg-[#111111] border border-white/10 rounded-2xl shadow-xl">
                                 <div className="text-4xl font-black text-primary font-mono">
                                     {result.formatted}
                                 </div>
@@ -408,11 +408,11 @@ const AccountingMode: React.FC = () => {
 
                             {/* Breakdown */}
                             {result.breakdown && result.breakdown.length > 0 && (
-                                <div className="flex-1 bg-white border-2 border-black rounded-none p-4 overflow-y-auto shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                    <h4 className="text-sm font-black text-black/60 uppercase mb-3">Desglose</h4>
+                                <div className="flex-1 bg-[#111111] border border-white/10 rounded-2xl p-4 overflow-y-auto shadow-xl">
+                                    <h4 className="text-sm font-black text-white/60 uppercase mb-3">Desglose</h4>
                                     <ul className="space-y-2 text-sm font-mono">
                                         {result.breakdown.map((line, i) => (
-                                            <li key={i} className="text-black flex items-start gap-2">
+                                            <li key={i} className="text-white flex items-start gap-2">
                                                 <span className="text-primary font-black">›</span>
                                                 {line}
                                             </li>
@@ -422,7 +422,7 @@ const AccountingMode: React.FC = () => {
                             )}
                         </div>
                     ) : (
-                        <div className="flex-1 flex items-center justify-center text-black/40">
+                        <div className="flex-1 flex items-center justify-center text-white/40">
                             <div className="text-center">
                                 <Calculator size={48} className="mx-auto mb-4 opacity-20" />
                                 <p className="font-bold">Ingresa los valores y presiona Calcular</p>

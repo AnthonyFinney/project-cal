@@ -106,11 +106,11 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
     const ActionButton: React.FC<{ action: MathActionDef }> = ({ action }) => (
         <button
             onClick={() => insertAction(action)}
-            className="flex flex-col items-center justify-center p-2 rounded-none bg-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] transition-all min-h-[48px]"
+            className="flex flex-col items-center justify-center p-2 rounded-2xl bg-[#111111] border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] transition-all min-h-[48px]"
             title={action.description}
         >
-            <span className="text-sm font-bold text-black">{action.label}</span>
-            <span className="text-[10px] text-black font-medium">{action.labelEs}</span>
+            <span className="text-sm font-bold text-white">{action.label}</span>
+            <span className="text-[10px] text-white font-medium">{action.labelEs}</span>
         </button>
     );
 
@@ -124,14 +124,14 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
         <button
             onClick={onClick}
             className={`
-        flex items-center justify-center rounded-none font-bold text-lg
-        transition-all border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] select-none h-12
+        flex items-center justify-center rounded-2xl font-bold text-lg
+        transition-all border border-white/10 shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] select-none h-12
         ${wide ? 'col-span-2' : ''}
         ${variant === 'primary'
-                    ? 'bg-primary text-black'
+                    ? 'bg-primary text-white'
                     : variant === 'secondary'
-                        ? 'bg-white text-black'
-                        : 'bg-white text-black'
+                        ? 'bg-[#111111] text-white'
+                        : 'bg-[#111111] text-white'
                 }
       `}
         >
@@ -140,7 +140,7 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
     );
 
     return (
-        <div className={`flex flex-col gap-4 ${compact ? 'p-2' : 'p-4'} bg-white`}>
+        <div className={`flex flex-col gap-4 ${compact ? 'p-2' : 'p-4'} bg-[#111111]`}>
 
             {/* Preview de LaTeX */}
             <LiveEditor
@@ -153,7 +153,7 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
 
                 {/* Columna izquierda: Acciones CAS */}
                 <div className="col-span-4 space-y-2">
-                    <div className="text-xs font-bold text-black uppercase tracking-wider mb-1">
+                    <div className="text-xs font-bold text-white uppercase tracking-wider mb-1">
                         Cálculo
                     </div>
                     <div className="grid grid-cols-2 gap-2">
@@ -165,7 +165,7 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
                         <ActionButton action={MATH_ACTIONS.PARTIAL_DERIV} />
                     </div>
 
-                    <div className="text-xs font-bold text-black uppercase tracking-wider mt-3 mb-1">
+                    <div className="text-xs font-bold text-white uppercase tracking-wider mt-3 mb-1">
                         Álgebra
                     </div>
                     <div className="grid grid-cols-2 gap-2">
@@ -178,7 +178,7 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
 
                 {/* Columna central: Funciones comunes */}
                 <div className="col-span-4 space-y-2">
-                    <div className="text-xs font-bold text-black uppercase tracking-wider mb-1">
+                    <div className="text-xs font-bold text-white uppercase tracking-wider mb-1">
                         Funciones
                     </div>
                     <div className="grid grid-cols-3 gap-2">
@@ -194,7 +194,7 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
                     </div>
 
                     {/* Variables comunes */}
-                    <div className="text-xs font-bold text-black uppercase tracking-wider mt-3 mb-1">
+                    <div className="text-xs font-bold text-white uppercase tracking-wider mt-3 mb-1">
                         Variables
                     </div>
                     <div className="grid grid-cols-6 gap-1">
@@ -210,7 +210,7 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
 
                 {/* Columna derecha: Numpad */}
                 <div className="col-span-4 space-y-2">
-                    <div className="text-xs font-bold text-black uppercase tracking-wider mb-1">
+                    <div className="text-xs font-bold text-white uppercase tracking-wider mb-1">
                         Numpad
                     </div>
                     <div className="grid grid-cols-4 gap-2">
@@ -263,10 +263,10 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
                         onClick={() => onEvaluate?.(getSympy(), getLatex())}
                         disabled={hasEmptyPlaceholders}
                         className={`
-              w-full py-3 rounded-none font-bold text-lg transition-all border-2 border-black
+              w-full py-3 rounded-2xl font-bold text-lg transition-all border border-white/10
               ${hasEmptyPlaceholders
                                 ? 'bg-gray-200 text-gray-500 cursor-not-allowed opacity-50'
-                                : 'bg-primary text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
+                                : 'bg-primary text-white shadow-xl hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]'
                             }
             `}
                     >
@@ -276,10 +276,10 @@ const MathKeyboardPRO: React.FC<MathKeyboardPROProps> = ({
             </div>
 
             {/* Hint de navegación */}
-            <div className="text-center text-xs text-black font-bold">
-                <kbd className="px-1.5 py-0.5 bg-white rounded-none border-2 border-black">Tab</kbd>
+            <div className="text-center text-xs text-white font-bold">
+                <kbd className="px-1.5 py-0.5 bg-[#111111] rounded-2xl border border-white/10">Tab</kbd>
                 {' '}siguiente □ •
-                <kbd className="px-1.5 py-0.5 bg-white rounded-none border-2 border-black ml-2">Shift+Tab</kbd>
+                <kbd className="px-1.5 py-0.5 bg-[#111111] rounded-2xl border border-white/10 ml-2">Shift+Tab</kbd>
                 {' '}anterior
             </div>
         </div>
